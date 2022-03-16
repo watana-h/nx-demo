@@ -18,18 +18,22 @@ const UserItemList: UserItem[] = [
 
 @Injectable()
 export class UsersService {
-  getUsers(): UserItem[] {
-/*** CSVから取得に変更 ***
-    return UserItemList;
-***/
-    const users: UserItem[] = [];
+  private users: UserItem[] = [];
+
+  constructor() {}
+
+  loadUsers() { 
     const FILE = join(resolve(), 'data/UserItemList.csv');
+    console.log('対象ファイルのパス:', FILE);
 
-    console.log('対象ファイルのパス', FILE);
-
+    // CSVロード&解析
     const data = readFileSync(FILE);
     const records = parse(data, {columns: true, trim: true});
 
+    // 配列(users)を全クリア
+    this.users.length = 0;
+
+    // データ確認して配列(users)に追加
     for (const record of records) {
       // console.log(record);
 
@@ -38,11 +42,19 @@ export class UsersService {
        && record['telephone'] != undefined
        && record['address'] != undefined) {
           // console.log('record match');
-          users.push(record);
+          this.users.push(record);
       }
     }
-    // console.log('END');
-    // console.log(users);
-    return users;
+    console.log('件数:', this.users.length);
+  }
+
+
+  getUsers(): UserItem[] {
+/*** CSVから取得に変更 ***
+    return UserItemList;
+***/
+
+    this.loadUsers();
+    return this.users;
   }
 }

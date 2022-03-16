@@ -14,4 +14,23 @@ export class UsersService {
   getUsers(): Observable<UserItem[]> {
     return this.http.get<UserItem[]>('/api/users');
   }
+
+/***
+  getUser(name: string): Observable<UserItem> {
+    return this.http.get<UserItem>('/api/users/${name}');
+  }
+
+  setUser(user: UserItem): Observable<UserItem> {
+    return this.http.post<UserItem>('/api/users', user);
+  }
+
+  updateUser(user: UserItem): Observable<UserItem> {
+    return this.http.post<UserItem>('/api/users/${name}', user);
+  }
+
+  deleteUser(user: UserItem): Observable<UserItem> {
+    return this.http.delete<UserItem>('/api/users/${user.company}');
+  }
+***/
+
 }
