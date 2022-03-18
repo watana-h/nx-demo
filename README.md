@@ -1,7 +1,9 @@
 # nx-demo
 Nx (Angular-NestJS monorepo) サンプル
 
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-list.png" width="600">
 
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-edit.png" width="600">
 
 ### 概要
 Angular-NestJS お勉強で作成したサンプルアプリです。
