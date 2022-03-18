@@ -1,7 +1,7 @@
 # nx-demo
 Nx (Angular-NestJS monorepo) サンプル
 
-![nx-demo](https://user-images.githubusercontent.com/60250268/157381397-9ed38abc-0424-41ce-adf5-ea30847a5ba6.png)
+
 
 ### 概要
 Angular-NestJS お勉強で作成したサンプルアプリです。
@@ -12,6 +12,7 @@ Angular-NestJS お勉強で作成したサンプルアプリです。
   - Header, Main Content, Footer 構成
   - 一覧表示時にバックエンドから情報一覧を取得してテーブル表示
   - Angular Material - Table Component、列ヘッダーでのソート 
+  - 一覧から対象リンクで編集画面に遷移
 
 ## 実行手順
 ### 事前準備
@@ -46,7 +47,7 @@ $ ng serve api
 別ターミナルで demo (Angular) サービスを提供してブラウザを起動
 ```
 $ cd nx-demo
-$ ng serve demo --open
+$ ng serve demo --host 0.0.0.0 --open
 ```
 
 ### 実行 - VSCode利用
@@ -68,14 +69,17 @@ nx-demo
  │  │  └ src 
  │  │     ├ app  
  │  │     │  ├ shared  
+ │  │     │  │  ├ dialog
  │  │     │  │  ├ footer  
  │  │     │  │  └ header
  │  │     │  └ users
- │  │     │     └ user-list 
+ │  │     │      ├ user-edit ［ 編集画面 ］
+ │  │     │      └ user-list ［ 一覧画面 ］
  │  │     ├ assets  
  │  │     └ environments 
  │  └ demo-e2e
  ├ data               ［ 一覧表示用 CSV データ格納 ］
+ ├ doc                ［ 画面キャプチャ ］
  ├ libs              
  │  └ api-interfaces ［ フロントエンド-バックエンド共通I/F定義 ］
  │      └ src
@@ -119,6 +123,8 @@ $ npm install @angular/flex-layout@12.0.0-beta.35
 # (3)-3. フロントエンドアプリ構築
 $ npx nx generate component shared/header   --project=demo --module=app
 $ npx nx generate component shared/footer   --project=demo --module=app
+$ npx nx generate component shared/dialog/alert-dialog --flat --project=demo --module=app
+$ npx nx generate component users/user-edit --project=demo --module=app
 $ npx nx generate component users/user-list --project=demo --module=app
 $ npx nx generate service   users/users     --project=demo
 // [TODO] 生成された各種ファイルを編集

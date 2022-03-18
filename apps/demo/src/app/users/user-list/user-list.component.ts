@@ -4,9 +4,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { UsersService } from "../users.service";
-// import { UserIItem } from '@nx-demo/api-interfaces';
+import { UserItem } from '@nx-demo/api-interfaces';
+import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 
 @Component({
   selector: 'nx-demo-user-list',
@@ -15,9 +17,11 @@ import { UsersService } from "../users.service";
 })
 export class UserListComponent implements OnInit {
   displayedColumns: string[] = ["company", "email", "telephone", "address"];
-  dataSource = new MatTableDataSource<any>([]);
+  dataSource = new MatTableDataSource<UserItem>([]);
   
-  constructor(private service: UsersService){}
+  constructor(
+    private service: UsersService,
+    private dialog: MatDialog){}
 
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
@@ -27,4 +31,17 @@ export class UserListComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+
+  openNotSupportedDialog() {
+ // const dialogRef = this.dialog.open(AlertDialogComponent,{
+    this.dialog.open(AlertDialogComponent,{
+      data:{
+        message: '本機能は現状未サポートです。',
+        buttonText: {
+          cancel: 'OK'
+        }
+      },
+    });
+  }
+
 }

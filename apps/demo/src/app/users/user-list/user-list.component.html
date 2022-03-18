@@ -1,27 +1,46 @@
-<div fxLayout="column">
+<div class="main-container">
+
+  <!-- 見出し -->
+  <h1>アカウント一覧</h1>
+
+  <!-- 表示エリア -->
+  <div fxLayout="column">
     <div fxFlex>
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 result-table">
+
+      <!-- ボタン -->
+      <div class="navi-box">
+        <button mat-raised-button color="primary"
+          matTooltip="新規アカウント追加を行います。" (click)="openNotSupportedDialog()">
+          <mat-icon>person_add_alt</mat-icon>
+          アカウント追加
+        </button>
+      </div>
+
+      <!-- 一覧表示 -->      
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-box">
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-        <!-- company Column -->
+
+        <!-- company -->
         <ng-container matColumnDef="company">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>会社名</th>
-          <td mat-cell *matCellDef="let element">{{ element.company }}</td>
+          <td mat-cell matTooltip="編集を行います。"
+            *matCellDef="let element"><a [routerLink]="['/users/user-edit', element.company]">{{ element.company }}</a></td>
         </ng-container>
   
-        <!-- telephone Column -->
+        <!-- telephone -->
         <ng-container matColumnDef="telephone">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>電話番号</th>
           <td mat-cell *matCellDef="let element">{{ element.telephone }}</td>
         </ng-container>
   
-        <!-- email Column -->
+        <!-- email -->
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>メールアドレス</th>
           <td mat-cell *matCellDef="let element">{{ element.email }}</td>
         </ng-container>
   
-        <!-- address Column -->
+        <!-- address -->
         <ng-container matColumnDef="address">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>住所</th>
           <td mat-cell *matCellDef="let element">{{ element.address }}</td>
@@ -31,9 +50,10 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
+  </div>
+
+  <!--
+  <div>Message: {{ hello$ | async | json }}</div>
+  -->
 </div>
- 
-<!--
- <div>Message: {{ hello$ | async | json }}</div>
--->
 

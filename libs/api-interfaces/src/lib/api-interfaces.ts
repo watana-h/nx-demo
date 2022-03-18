@@ -4,6 +4,9 @@ export interface UserItem {
   email: string;
   telephone: string;
   address: string;
+  id: string;
+  account: string;
+  password: string;
 }
 
 /* class でも良い？ *

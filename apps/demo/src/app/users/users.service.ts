@@ -15,17 +15,17 @@ export class UsersService {
     return this.http.get<UserItem[]>('/api/users');
   }
 
-/***
-  getUser(name: string): Observable<UserItem> {
-    return this.http.get<UserItem>('/api/users/${name}');
+  getUser(company: string | null): Observable<UserItem> {
+     return this.http.get<UserItem>(`/api/users/${company}`);
   }
 
+/***
   setUser(user: UserItem): Observable<UserItem> {
     return this.http.post<UserItem>('/api/users', user);
   }
 
   updateUser(user: UserItem): Observable<UserItem> {
-    return this.http.post<UserItem>('/api/users/${name}', user);
+    return this.http.post<UserItem>('/api/users/${user.company}', user);
   }
 
   deleteUser(user: UserItem): Observable<UserItem> {
