@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { FooterService } from './footer.service';
+
 @Component({
   selector: 'nx-demo-footer',
   templateUrl: './footer.component.html',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public footer: FooterService) { }
 
   ngOnInit(): void {
   }

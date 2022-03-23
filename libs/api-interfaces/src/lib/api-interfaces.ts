@@ -1,3 +1,10 @@
+
+/* 認証アカウント */
+export interface AuthParam {
+  user: string;
+  password: string;
+}
+
 /* ユーザ情報項目 */
 export interface UserItem {
   company: string;

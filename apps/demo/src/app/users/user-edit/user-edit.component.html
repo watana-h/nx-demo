@@ -63,7 +63,9 @@
         <div>
           <mat-form-field class="item-box">
             <mat-label>パスワード（必須）</mat-label>
-            <input class="item-input" matInput name="password" required [(ngModel)]="user.password">
+            <input class="item-input" matInput name="password" 
+              [type]="blnPassVisible ? 'password' : 'text'"  required [(ngModel)]="user.password">
+            <mat-icon class="pointer" matSuffix (click)="blnPassVisible = !blnPassVisible">{{blnPassVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
           </mat-form-field>
         </div>
 

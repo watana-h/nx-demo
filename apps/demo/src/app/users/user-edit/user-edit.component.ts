@@ -1,27 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { HeaderService } from '../../shared/header/header.service';
+import { FooterService } from '../../shared/footer/footer.service';
 import { UsersService } from "../users.service";
 import { UserItem } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
+
 
 @Component({
   selector: 'nx-demo-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnDestroy {
+  blnPassVisible = true;
   public user: UserItem = { company: "", email: "", telephone: "", address: "",
                             id: "", account: "", password: "" };
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private header: HeaderService,
+    private footer: FooterService,
     private service: UsersService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    // header,footer表示
+    this.header.show();
+    this.footer.show();
+  
     const company = this.route.snapshot.paramMap.get('company');
     console.log('company:', company);
 
@@ -29,6 +39,12 @@ export class UserEditComponent implements OnInit {
       this.service.getUser(company)
       .subscribe(result => this.user = result);
     }
+  }
+
+  ngOnDestroy(): void {
+    // header,footerデフォルトに戻す
+    this.header.show();
+    this.footer.show();
   }
 
   openNotSupportedDialog() {

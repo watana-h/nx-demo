@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { HeaderService } from './header.service';
+
 @Component({
   selector: 'nx-demo-header',
   templateUrl: './header.component.html',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public header: HeaderService) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

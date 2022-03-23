@@ -1,0 +1,61 @@
+<div class="main-container">
+  <mat-card class="card-box">
+    <mat-card-header>
+      <mat-card-title>受発注システム - ログイン</mat-card-title>
+      <mat-card-subtitle>ユーザー名とパスワードを入力してください。</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      
+      <form class="login-form" [formGroup]="loginForm" (keydown.enter)="$event.preventDefault()" autocomplete="off">
+        
+        <!-- user -->
+        <div>
+          <mat-form-field class="item-box">
+            <mat-label>ユーザー名（必須）</mat-label>
+            <input matInput formControlName="user" placeholder="hoge@example.com" required />
+            <mat-error *ngIf="loginForm.controls['user'].errors?.['required']">ユーザー名を空白にはできません。</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <!-- password -->
+        <div>
+          <mat-form-field class="item-box">
+            <mat-label>パスワード（必須）</mat-label>
+            <input matInput minlength="6" placeholder="6文字以上の英数字"
+              [type]="blnPassVisible ? 'password' : 'text'"  formControlName="password" required>
+            <mat-icon class="pointer" matSuffix (click)="blnPassVisible = !blnPassVisible">{{blnPassVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">パスワードを空白にはできません。</mat-error>
+            <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength']">パスワードは6文字以上の英数字です。</mat-error>
+          </mat-form-field>
+        </div>
+        <!-- loginFormのinvalidプロパティに各項目のバリデーションの総合結果が自動的に入ります -->
+        <!-- タグ内でrequiredを設定することで、ふたつの項目のうちどちらかが空白ならボタンを押せない仕組みにしています  -->
+        
+        <!-- ボタン -->
+        <div class="navi-box">
+          <button class="navi-button" type="button" mat-raised-button color="primary"
+            [disabled]="loginForm.invalid" (click)="login()">
+            <mat-icon>login</mat-icon>
+            ログイン
+          </button>
+        </div>
+ 
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-error *ngIf="0 < errors.length">
+        <ul>
+          <li *ngFor="let error of errors">{{error}}</li>
+        </ul>
+      </mat-error>
+    </mat-card-footer>
+  </mat-card>
+  <!-- 処理中の画面 
+  <div *ngIf="blnLoading" class="loading">
+    <div class="loading-inner">
+      <mat-spinner></mat-spinner>
+      {{strLoadingMsg}}
+    </div>
+  </div>
+  -->
+</div>
