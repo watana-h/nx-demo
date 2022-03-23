@@ -124,9 +124,12 @@ $ npm install @angular/flex-layout@12.0.0-beta.35
 //        apps/demo/src/app/app.module.ts を手で修正
 
 # (3)-3. フロントエンドアプリ構築
-$ npx nx generate component shared/header   --project=demo --module=app
-$ npx nx generate component shared/footer   --project=demo --module=app
+$ npx nx generate component shared/header              --project=demo --module=app
+$ npx nx generate component shared/footer              --project=demo --module=app
+$ npx nx generate service   shared/header/header       --flat --project=demo
+$ npx nx generate service   shared/footer/footer       --flat --project=demo
 $ npx nx generate component shared/dialog/alert-dialog --flat --project=demo --module=app
+$ npx nx generate component login           --project=demo --module=app
 $ npx nx generate component users/user-edit --project=demo --module=app
 $ npx nx generate component users/user-list --project=demo --module=app
 $ npx nx generate service   users/users     --project=demo
