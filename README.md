@@ -1,6 +1,8 @@
 # nx-demo
 Nx (Angular-NestJS monorepo) サンプル
 
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/login.png" width="600">
+
 <img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-list.png" width="600">
 
 <img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-edit.png" width="600">
@@ -11,10 +13,17 @@ Angular-NestJS お勉強で作成したサンプルアプリです。
 - バックエンド
   - フロントエンドからのリクエストを受けて CSV 管理されている情報一覧をレスポンスする
 - フロントエンド
-  - Header, Main Content, Footer 構成
-  - 一覧表示時にバックエンドから情報一覧を取得してテーブル表示
-  - Angular Material - Table Component、列ヘッダーでのソート 
-  - 一覧から対象リンクで編集画面に遷移
+  - ワイヤーフレーム
+    - Header, Main Content, Footer 構成
+  - 画面構成
+    - ログイン画面
+    - アカウント一覧
+    - アカウント編集
+  - 画面遷移
+    - ログイン画面で[ログイン]→アカウント一覧
+    - アカウント一覧画面の一覧[左列リンク]→アカウント編集
+    - アカウント編集画面[キャンセル]→アカウント一覧
+    - Header左端[ログアウト]→ログイン画面
 
 ## 実行手順
 ### 事前準備
