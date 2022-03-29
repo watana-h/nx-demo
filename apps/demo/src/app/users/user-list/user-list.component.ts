@@ -18,7 +18,7 @@ import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ["company", "email", "telephone", "address"];
+  displayedColumns: string[] = ["id", "company", "email", "telephone", "address"];
   dataSource = new MatTableDataSource<UserItem>([]);
   
   constructor(
@@ -32,6 +32,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.show();
+    this.header.setTitle("受発注管理 - アカウント一覧");
     this.footer.show();
 
     this.service.getUsers().subscribe((responce) => {

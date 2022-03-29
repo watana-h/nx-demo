@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { HeaderService } from './header.service';
 
+
 @Component({
   selector: 'nx-demo-header',
   templateUrl: './header.component.html',
@@ -16,4 +17,5 @@ export class HeaderComponent implements OnInit {
     public header: HeaderService) { }
 
   ngOnInit(): void { }
+
 }

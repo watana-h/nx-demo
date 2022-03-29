@@ -13,9 +13,9 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 
-  @Get(':company')
+  @Get(':id')
   @HttpCode(HttpStatus.OK) 
-  getUser(@Param('company') company: string): UserItem {
-    return this.usersService.getUser(company)
+  getUser(@Param('id') id: string): UserItem {
+    return this.usersService.getUser(id)
   }
 }

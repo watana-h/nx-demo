@@ -1,16 +1,25 @@
 <div class="main-container">
 
-  <!-- 見出し -->
+  <!-- 見出し 
   <h1>アカウント編集</h1>
-
+  -->
+  
   <!-- 編集エリア -->
   <form novalidate>
     <div class="form-box">
       <div id="contents" *ngIf="user">
 
+        <!-- id -->
+        <div>
+          <mat-form-field class="item-box" appearance="standard">
+            <mat-label>ID（編集不可）</mat-label>
+            <input class="item-input" matInput disabled="" name="id" [(ngModel)]="user.id">
+          </mat-form-field>
+        </div>
+
         <!-- company -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>会社名（必須）</mat-label>
             <input class="item-input" matInput name="company" required [(ngModel)]="user.company">
             <mat-error>必須項目なので必ず入力してください。</mat-error>
@@ -19,7 +28,7 @@
 
         <!-- telephone -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>電話番号（必須）</mat-label>
             <input class="item-input" matInput name="telephone" required [(ngModel)]="user.telephone">
             <mat-error>必須項目なので必ず入力してください。</mat-error>
@@ -28,7 +37,7 @@
 
         <!-- email -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>メールアドレス（必須）</mat-label>
             <input class="item-input" matInput name="email" required [(ngModel)]="user.email">
             <mat-error>必須項目なので必ず入力してください。</mat-error>
@@ -37,23 +46,15 @@
 
         <!-- address -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>住所</mat-label>
             <input class="item-input" matInput name="address" [(ngModel)]="user.address">
           </mat-form-field>
         </div>
 
-        <!-- id -->
-        <div>
-          <mat-form-field class="item-box">
-            <mat-label>法人番号</mat-label>
-            <input class="item-input" matInput name="id" [(ngModel)]="user.id">
-          </mat-form-field>
-        </div>
-
         <!-- account -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>アカウント（必須）</mat-label>
             <input class="item-input" matInput name="account" required [(ngModel)]="user.account">
           </mat-form-field>
@@ -61,7 +62,7 @@
 
         <!-- password -->
         <div>
-          <mat-form-field class="item-box">
+          <mat-form-field class="item-box" appearance="standard">
             <mat-label>パスワード（必須）</mat-label>
             <input class="item-input" matInput name="password" 
               [type]="blnPassVisible ? 'password' : 'text'"  required [(ngModel)]="user.password">

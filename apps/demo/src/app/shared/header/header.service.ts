@@ -4,14 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HeaderService {
- visible: boolean;
+  visible: boolean;
+  title: string;
+
  constructor() {
    this.visible = true;
- }
- hide() {
-   this.visible = false;
- }
- show() {
-   this.visible = true;
- }
+   this.title = "受発注管理";
+  }
+
+  hide() {
+    this.visible = false;
+  }
+  show() {
+    this.visible = true;
+  }
+  setTitle(title: string) {
+    this.title = title;
+  }
 }

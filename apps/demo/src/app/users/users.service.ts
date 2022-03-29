@@ -15,8 +15,8 @@ export class UsersService {
     return this.http.get<UserItem[]>('/api/users');
   }
 
-  getUser(company: string | null): Observable<UserItem> {
-     return this.http.get<UserItem>(`/api/users/${company}`);
+  getUser(id: string | null): Observable<UserItem> {
+     return this.http.get<UserItem>(`/api/users/${id}`);
   }
 
 /***

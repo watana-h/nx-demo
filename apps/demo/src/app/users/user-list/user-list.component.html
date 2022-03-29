@@ -1,7 +1,8 @@
 <div class="main-container">
 
-  <!-- 見出し -->
+  <!-- 見出し
   <h1>アカウント一覧</h1>
+  -->
 
   <!-- 表示エリア -->
   <div fxLayout="column">
@@ -21,11 +22,17 @@
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
+        <!-- id -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+  
         <!-- company -->
         <ng-container matColumnDef="company">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>会社名</th>
           <td mat-cell matTooltip="編集を行います。"
-            *matCellDef="let element"><a [routerLink]="['/users/user-edit', element.company]">{{ element.company }}</a></td>
+            *matCellDef="let element"><a [routerLink]="['/users/user-edit', element.id]">{{ element.company }}</a></td>
         </ng-container>
   
         <!-- telephone -->

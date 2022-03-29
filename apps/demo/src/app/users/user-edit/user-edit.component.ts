@@ -30,13 +30,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.show();
+    this.header.setTitle("受発注管理 - アカウント編集");
     this.footer.show();
   
-    const company = this.route.snapshot.paramMap.get('company');
-    console.log('company:', company);
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log('id:', id);
 
-    if (company) {
-      this.service.getUser(company)
+    if (id) {
+      this.service.getUser(id)
       .subscribe(result => this.user = result);
     }
   }
