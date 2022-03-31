@@ -180,4 +180,10 @@ $ mkdir data
 // [TODO] data/UserItemList.csv を用意
 ```
 
-
+## 参考情報
+- <a href="https://nanbu.marune205.net/2021/12/angular-login-page.html">Angularでログインページを作成する</a>
+- <a href="https://satolabo.net/2019/12/14/angular-typescript-sleep/">Angular8のtypescriptでsleep処理を実装する</a>
+- <a href="https://note.com/haru_hira/n/nbb25eadadee9">Angularでheaderコンポーネントを1部のモジュールで非表示にしたい時</a>
+- <a href="https://code-maze.com/angular-material-table/">Angular Material Table, Filtering, Sorting, Paging</a>
+- <a href="https://www.freakyjolly.com/angular-material-datatable-pagination-sorting-filter-and-fixed-columns-tutorial/">Angular Material 9|8 DataTable, Pagination, Sorting, Filter and Fixed Columns Tutorial</a>
+- <a href="https://www.mariokandut.com/how-to-translate-matpaginator-angular/">How to translate MatPaginator</a>
