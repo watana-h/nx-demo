@@ -19,6 +19,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AlertDialogComponent } from './shared/dialog/alert-dialog.component';
 import { LoginComponent } from './login/login.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, 
@@ -26,7 +27,7 @@ import { LoginComponent } from './login/login.component';
                  AlertDialogComponent, LoginComponent],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, 
             BrowserAnimationsModule, MaterialModule,
-            FlexLayoutModule,
+            FlexLayoutModule, 
             AppRoutingModule],
   providers: [UsersService, HeaderService, FooterService],
   bootstrap: [AppComponent],

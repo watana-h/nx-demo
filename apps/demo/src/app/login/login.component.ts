@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
 import { AuthParam } from '@nx-demo/api-interfaces';
 import { HeaderService } from '../shared/header/header.service';
 import { FooterService } from '../shared/footer/footer.service';
@@ -17,8 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   blnPassVisible = true;
   auth: AuthParam = {user: "", password: ""};
 
-  // blnLoading: boolean = false;
-  // strLoadingMsg: string = "ログイン処理中です";
+  blnLoading = false;
+  strLoadingMsg = "ログイン処理中です";
     
   loginForm = this.fb.group({
     user:[''],
@@ -44,8 +47,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         return;
       }
 
-      // ユーザ一覧ページに遷移
-      this.router.navigateByUrl('/users/user-list');
+      // ウェイト画面
+      this.blnLoading = true;
+
+      // スリープ(800ms)後に処理実施
+      const delay_observable = of('').pipe(delay(800));
+      delay_observable.subscribe(s => {
+        // ユーザ一覧ページに遷移
+        this.router.navigateByUrl('/users/user-list');
+      });
    }
 
     ngOnInit(): void {

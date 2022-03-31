@@ -8,6 +8,14 @@
   <div fxLayout="column">
     <div fxFlex>
 
+      <!-- フィルタリング-->
+      <div>
+        <mat-form-field class="item-box" appearance="standard">
+          <mat-label>検索条件</mat-label>
+          <input matInput #filterValue (keyup)="applyFilter(filterValue.value)" placeholder="検索文字列を入力してください...">
+        </mat-form-field>
+      </div>
+
       <!-- ボタン -->
       <div class="navi-box">
         <button mat-raised-button color="primary"
@@ -56,6 +64,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+
+      <!-- paginator -->
+      <div class="page-box">
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+      </div>
     </div>
   </div>
 

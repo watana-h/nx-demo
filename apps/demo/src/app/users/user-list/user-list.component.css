@@ -6,13 +6,21 @@
 }
 .table-box {
   margin-top: 10px;
+  margin-bottom: 5px;
   width: 100%;
+}
+.item-box {
+  width: 350px;
 }
 .navi-box {
   width: 100%;
 }
+.page-box {
+  margin-top: 0px;
+}
 /**
 .navi-button {
+  margin-top: 10px;
   margin-left: 10px;
   width: 200px;
 }
