@@ -56,6 +56,10 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(responce);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
+    // 検索フィルタの対象項目を id に限定
+    // this.dataSource.filterPredicate =
+    //   (users: UserItem, filter: string) => users.id.indexOf(filter) != -1;
     });
   }
 
