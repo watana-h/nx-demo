@@ -1,3 +1,7 @@
+/**
+ * @name header.service
+ * @description ヘッダ部表示/非表示、タイトル設定
+*/
 import { Injectable } from '@angular/core';
 
 @Injectable({

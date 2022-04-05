@@ -1,3 +1,7 @@
+/**
+ * @name user-edit.component
+ * @description ユーザ編集画面
+*/
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -48,6 +52,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.footer.show();
   }
 
+  /**
+   * @name openNotSupportedDialog
+   * @description 未サポートダイアログ表示
+   */
   openNotSupportedDialog() {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{

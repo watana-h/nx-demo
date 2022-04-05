@@ -1,3 +1,7 @@
+/**
+ * @name footer.service
+ * @description フッタ部表示/非表示
+*/
 import { Injectable } from '@angular/core';
 
 @Injectable({

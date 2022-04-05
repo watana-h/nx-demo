@@ -1,39 +1,31 @@
+/**
+ * @name ユーザ情報
+ * @description 本システムの利用ユーザ情報を管理
+*/
+export interface UserItem {
+  id: string;          // 識別番号
+  company: string;     // 会社名
+  email: string;
+  telephone: string;
+  address: string;
+  account: string;
+  password: string;
+}
+// export class UserItem {
+//   hoge: string;
+//   
+//   constructor() {
+//     hoge = "";
+//   }  
+// }
 
-/* 認証アカウント */
+
+/**
+ * @name 認証アカウント
+ * @description 認証処理の情報を管理
+*/
 export interface AuthParam {
   user: string;
   password: string;
 }
 
-/* ユーザ情報項目 */
-export interface UserItem {
-  company: string;
-  email: string;
-  telephone: string;
-  address: string;
-  id: string;
-  account: string;
-  password: string;
-}
-
-/* class でも良い？ *
-export class UserItem {
-  company: string;
-  email: string;
-  telephone: string;
-  address: string;
-
-  constructor() {
-    this.company = "";
-    this.email = "";
-    this.telephone = "";
-    this.address = "";
-  }
-}
-*****/
-
-/* 雛形で生成されたので不要 *
-export interface Message {
-  message: string;
-}
-*****/

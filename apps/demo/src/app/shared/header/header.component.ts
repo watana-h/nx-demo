@@ -1,8 +1,11 @@
+/**
+ * @name header.component
+ * @description 共通ヘッダ
+*/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { HeaderService } from './header.service';
-
 
 @Component({
   selector: 'nx-demo-header',

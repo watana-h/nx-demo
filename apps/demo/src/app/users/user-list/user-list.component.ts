@@ -1,9 +1,8 @@
-// 雛形で生成されたので不要
-// import { Component, OnInit } from '@angular/core';
-
+/**
+ * @name user-list.component
+ * @description ユーザ一覧画面
+*/
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
-// import { FormControl } from "@angular/forms";
-
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -52,6 +51,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       return `${length} 件中 ${startIndex + 1} - ${endIndex}`;
     }
 
+    // ユーザ一覧取得
     this.service.getUsers().subscribe((responce) => {
       this.dataSource = new MatTableDataSource(responce);
       this.dataSource.paginator = this.paginator;
@@ -78,6 +78,10 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.footer.show();
   }
 
+  /**
+   * @name openNotSupportedDialog
+   * @description 未サポートダイアログ表示
+   */
   openNotSupportedDialog() {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{

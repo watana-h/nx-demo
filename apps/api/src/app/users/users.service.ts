@@ -37,6 +37,10 @@ export class UsersService {
 
   constructor() {}
 
+  /**
+   * @name loadUsers
+   * @description CSVファイルを users に読み込む
+   */
   loadUsers() { 
     const FILE = join(resolve(), 'data/UserItemList.csv');
     console.log('対象ファイルのパス:', FILE);
@@ -66,13 +70,22 @@ export class UsersService {
     console.log('件数:', this.users.length);
   }
 
+  /**
+   * @name getUsers
+   * @description 一覧取得
+   * @returns users
+   */
   getUsers(): UserItem[] {
-  // return UserItemList;
-
     this.loadUsers();
     return this.users;
   }
 
+  /**
+   * @name getUser
+   * @description 対象idの情報取得
+   * @params id
+   * @returns users
+   */
   getUser(id: string): UserItem {
     console.log('getUser:id=', id);
     this.loadUsers();

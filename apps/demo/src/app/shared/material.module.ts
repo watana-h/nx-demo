@@ -1,3 +1,7 @@
+/**
+ * @name material.module
+ * @description Angular Material コンポーネント
+*/
 import {NgModule} from '@angular/core';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkAccordionModule} from '@angular/cdk/accordion';

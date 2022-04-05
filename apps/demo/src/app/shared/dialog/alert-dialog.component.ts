@@ -1,3 +1,7 @@
+/**
+ * @name alert-dialog.component
+ * @description 共通アラートダイアログ
+*/
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 

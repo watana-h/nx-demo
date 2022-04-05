@@ -1,3 +1,7 @@
+/**
+ * @name footer.component
+ * @description 共通フッタ
+*/
 import { Component, OnInit } from '@angular/core';
 
 import { FooterService } from './footer.service';

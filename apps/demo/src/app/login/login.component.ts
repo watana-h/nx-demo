@@ -1,3 +1,7 @@
+/**
+ * @name login.component
+ * @description ログイン画面
+*/
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
