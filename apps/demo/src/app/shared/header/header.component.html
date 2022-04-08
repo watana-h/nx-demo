@@ -1,16 +1,18 @@
-<div *ngIf="header.visible">
+<div *ngIf="headerVisible">
   <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>{{ header.title }}</span>
+    <span>{{ headerTitle }}</span>
     <span class="spacer"></span>
 
     <!-- ボタン -->
-    <button class="navi-button" type="button" mat-raised-button color="warn"
-      matTooltip="本システムからログアウトします。" [routerLink]="['/login']">
-    <mat-icon>logout</mat-icon>
-    ログアウト
-  </button>
+    <div *ngIf="logoutVisible">
+      <button class="navi-button" type="button" mat-raised-button color="warn"
+        matTooltip="本システムからログアウトします。" [routerLink]="['/login']">
+        <mat-icon>logout</mat-icon>
+        &nbsp;ログアウト
+      </button>
+    </div>
   </mat-toolbar>
 </div>

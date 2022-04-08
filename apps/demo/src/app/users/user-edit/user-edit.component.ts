@@ -22,6 +22,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   blnPassVisible = true;
   public user: UserItem = { company: "", email: "", telephone: "", address: "",
                             id: "", account: "", password: "" };
+  id: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,23 +34,27 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // header,footer表示
-    this.header.show();
+    this.header.setVisible(true);
     this.header.setTitle("受発注管理 - アカウント編集");
-    this.footer.show();
+    this.header.setLogoutVisible(true);
+    this.footer.setVisible(true);
   
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log('id:', id);
+    const paramId = this.route.snapshot.paramMap.get('id');
+    console.log('id:', paramId);
 
-    if (id) {
-      this.service.getUser(id)
-      .subscribe(result => this.user = result);
+    if (paramId) {
+      this.id = paramId;
+      this.service.getUser(this.id)
+        .subscribe(result => this.user = result);
+    } else {
+       this.router.navigate(["error"]);
     }
   }
 
   ngOnDestroy(): void {
     // header,footerデフォルトに戻す
-    this.header.show();
-    this.footer.show();
+    this.header.setVisible(true);
+    this.footer.setVisible(true);
   }
 
   /**

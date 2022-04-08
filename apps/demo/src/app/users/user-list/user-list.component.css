@@ -1,12 +1,8 @@
 .main-container {
   margin-left: 10px;
+  margin-right: 10px;
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 95vw;
-}
-.table-box {
-  margin-top: 10px;
-  margin-bottom: 5px;
   width: 100%;
 }
 .item-box {
@@ -15,13 +11,11 @@
 .navi-box {
   width: 100%;
 }
+.table-box {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+}
 .page-box {
   margin-top: 0px;
 }
-/**
-.navi-button {
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 200px;
-}
-**/

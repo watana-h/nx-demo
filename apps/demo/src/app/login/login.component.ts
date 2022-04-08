@@ -64,14 +64,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
       // header,footer非表示
-      this.header.hide();
-      this.footer.hide();
+      this.header.setVisible(false);
+      this.footer.setVisible(false);
     }
 
     ngOnDestroy(): void {
       // header,footerデフォルトに戻す
-      this.header.show();
-      this.footer.show();
+      this.header.setVisible(true);
+      this.footer.setVisible(true);
     }
 
 }

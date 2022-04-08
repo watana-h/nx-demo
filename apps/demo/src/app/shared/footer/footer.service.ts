@@ -3,19 +3,19 @@
  * @description フッタ部表示/非表示
 */
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FooterService {
-  visible: boolean;
-  constructor() {
-    this.visible = true;
+  visible  = new BehaviorSubject(false);
+
+  constructor() { }
+
+  // フッタ表示/非表示
+  setVisible(isVisible: boolean) {
+    this.visible.next(isVisible);
   }
-  hide() {
-    this.visible = false;
-  }
-  show() {
-    this.visible = true;
-  }
+
  }

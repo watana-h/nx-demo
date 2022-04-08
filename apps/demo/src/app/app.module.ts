@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,17 +19,21 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AlertDialogComponent } from './shared/dialog/alert-dialog.component';
 import { LoginComponent } from './login/login.component';
-import { MatPaginatorIntl } from '@angular/material/paginator';
+import { ErrorComponent } from './shared/error/error.component';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, 
                  HeaderComponent, FooterComponent, UserListComponent, UserEditComponent, 
-                 AlertDialogComponent, LoginComponent],
+                 AlertDialogComponent, LoginComponent, ErrorComponent],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, 
             BrowserAnimationsModule, MaterialModule,
             FlexLayoutModule, 
             AppRoutingModule],
-  providers: [UsersService, HeaderService, FooterService],
+  providers: [UsersService, HeaderService, FooterService,
+              {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
+             ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

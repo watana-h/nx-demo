@@ -1,0 +1,14 @@
+.error-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.message-area {
+  padding: 10px;
+  p {
+    white-space: pre-wrap;
+  }
+}
+.action-area {
+  text-align: center;
+  margin-top: 10px;
+}

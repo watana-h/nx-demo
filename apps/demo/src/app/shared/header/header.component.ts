@@ -13,12 +13,19 @@ import { HeaderService } from './header.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  headerTitle = "受発注管理";
+  headerVisible: boolean = false; 
+  logoutVisible: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public header: HeaderService) { }
+    private header: HeaderService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.header.title.subscribe(updatedValue => this.headerTitle = updatedValue);
+    this.header.visible.subscribe(updatedValue => this.headerVisible = updatedValue);
+    this.header.isLogout.subscribe(updatedValue => this.logoutVisible = updatedValue);
+  }
 
 }

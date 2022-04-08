@@ -12,11 +12,13 @@ import { FooterService } from './footer.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  footerVisible: boolean = false; 
 
   constructor(
-    public footer: FooterService) { }
+    private footer: FooterService) { }
 
   ngOnInit(): void {
+    this.footer.visible.subscribe(updatedValue => this.footerVisible = updatedValue);
   }
 
 }

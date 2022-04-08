@@ -3,8 +3,9 @@
  * @description ユーザ情報をバックエンドから取得
 */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, retry, throwError, catchError } from 'rxjs';
+
 import { UserItem } from '@nx-demo/api-interfaces';
 
 @Injectable({
@@ -24,6 +25,7 @@ export class UsersService {
     return this.http.get<UserItem[]>('/api/users');
   }
 
+
   /**
    * @name getUser
    * @description 対象idの情報取得
@@ -31,7 +33,7 @@ export class UsersService {
    * @returns users
    */
   getUser(id: string): Observable<UserItem> {
-     return this.http.get<UserItem>(`/api/users/${id}`);
+    return this.http.get<UserItem>(`/api/users/${id}`);
   }
 
 /***

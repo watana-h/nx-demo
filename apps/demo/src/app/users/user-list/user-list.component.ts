@@ -3,6 +3,7 @@
  * @description ユーザ一覧画面
 */
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -24,6 +25,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<UserItem>([]);
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private header: HeaderService,
     private footer: FooterService,
     private service: UsersService,
@@ -34,9 +37,11 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // header,footer表示
-    this.header.show();
+    this.header.setVisible(true);
     this.header.setTitle("受発注管理 - アカウント一覧");
-    this.footer.show();
+    this.header.setLogoutVisible(true);
+    this.footer.setVisible(true);
+
     // paginator日本語化
     this.paginator._intl.itemsPerPageLabel = '表示件数';
     this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
@@ -52,14 +57,14 @@ export class UserListComponent implements OnInit, OnDestroy {
     }
 
     // ユーザ一覧取得
-    this.service.getUsers().subscribe((responce) => {
-      this.dataSource = new MatTableDataSource(responce);
+    this.service.getUsers().subscribe(result => {
+      this.dataSource = new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
-    // 検索フィルタの対象項目を id に限定
-    // this.dataSource.filterPredicate =
-    //   (users: UserItem, filter: string) => users.id.indexOf(filter) != -1;
+   // 検索フィルタの対象項目を id に限定
+   // this.dataSource.filterPredicate =
+   //   (users: UserItem, filter: string) => users.id.indexOf(filter) != -1;
     });
   }
 
@@ -74,8 +79,8 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     // header,footerデフォルトに戻す
-    this.header.show();
-    this.footer.show();
+    this.header.setVisible(true);
+    this.header.setVisible(true);
   }
 
   /**

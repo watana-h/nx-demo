@@ -1,0 +1,25 @@
+<div class="error-wrapper">
+    <section class="message-area">
+        <ng-container *ngIf="eno; else notEno">
+            <mat-card>
+                <p>{{ eno }}&nbsp;：&nbsp;{{ message }}</p>
+            </mat-card>
+        </ng-container>
+        <ng-template #notEno>
+            <mat-card>
+                <p>{{ message }}</p>
+            </mat-card>
+        </ng-template>
+    </section>
+    <section class="action-area">
+        <button mat-raised-button color="primary" 
+          matTooltip="タブブラウザ、ブランク表示に戻ります。" (click)="closeWindow()">
+          <mat-icon>close</mat-icon>
+          &nbsp;閉じる
+        </button>
+    </section>
+</div>
+<!--
+          matTooltip="ログイン画面を再表示します。" [routerLink]="['/login']">
+-->
+

@@ -7,6 +7,8 @@ Nx (Angular-NestJS monorepo) サンプル
 
 <img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-edit.png" width="600">
 
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/error.png" width="600">
+
 
 ### 概要
 Angular-NestJS お勉強で作成したサンプルアプリです。
@@ -20,21 +22,12 @@ Angular-NestJS お勉強で作成したサンプルアプリです。
     - ログイン画面
     - アカウント一覧
     - アカウント編集
+    - エラー表示画面
   - 画面遷移
     - ログイン画面で[ログイン]→アカウント一覧
     - アカウント一覧画面の一覧[左列リンク]→アカウント編集
     - アカウント編集画面[キャンセル]→アカウント一覧
     - Header右端[ログアウト]→ログイン画面
-
-### 画面遷移図
-```mermaid
-graph TD
-    1(ログイン画面) --> |ログイン| 2(アカウント一覧)
-    2 --> |対象選択| 3(アカウント編集)
-    3 --> |編集終了| 2
-    2 --> |ログアウト| 1
-    3 --> |ログアウト| 1
-```
 
 ## 実行手順
 ### 事前準備
@@ -92,12 +85,14 @@ nx-demo
  │  │     ├ app  
  │  │     │  ├ shared  
  │  │     │  │  ├ dialog
+ │  │     │  │  ├ error         [ エラー表示画面 ]  
  │  │     │  │  ├ footer  
- │  │     │  │  └ header
- │  │     │  ├ login         ［ ログイン画面 ］
+ │  │     │  │  ├ header  
+ │  │     │  │  └ interceptors
+ │  │     │  ├ login           ［ ログイン画面 ］
  │  │     │  └ users
- │  │     │      ├ user-edit ［ 編集画面 ］
- │  │     │      └ user-list ［ 一覧画面 ］
+ │  │     │      ├ user-edit   ［ 編集画面 ］
+ │  │     │      └ user-list   ［ 一覧画面 ］
  │  │     ├ assets  
  │  │     └ environments 
  │  └ demo-e2e
@@ -144,15 +139,17 @@ $ npm install @angular/flex-layout@12.0.0-beta.35
 //        apps/demo/src/app/app.module.ts を手で修正
 
 # (3)-3. フロントエンドアプリ構築
-$ npx nx generate component shared/header              --project=demo --module=app
-$ npx nx generate component shared/footer              --project=demo --module=app
-$ npx nx generate service   shared/header/header       --flat --project=demo
-$ npx nx generate service   shared/footer/footer       --flat --project=demo
-$ npx nx generate component shared/dialog/alert-dialog --flat --project=demo --module=app
-$ npx nx generate component login           --project=demo --module=app
-$ npx nx generate component users/user-edit --project=demo --module=app
-$ npx nx generate component users/user-list --project=demo --module=app
-$ npx nx generate service   users/users     --project=demo
+$ npx nx generate component   shared/header              --project=demo --module=app
+$ npx nx generate component   shared/footer              --project=demo --module=app
+$ npx nx generate service     shared/header/header       --flat --project=demo
+$ npx nx generate service     shared/footer/footer       --flat --project=demo
+$ npx nx generate component   shared/dialog/alert-dialog --flat --project=demo --module=app
+$ npx nx generate component   shared/error               --project=demo --module=app
+$ npx nx generate interceptor shared/interceptors/HttpError --flat --project=demo
+$ npx nx generate component   login           --project=demo --module=app
+$ npx nx generate component   users/user-edit --project=demo --module=app
+$ npx nx generate component   users/user-list --project=demo --module=app
+$ npx nx generate service     users/users     --project=demo
 // [TODO] 生成された各種ファイルを編集
 
 # ---------------------------------------------------------
@@ -174,7 +171,21 @@ $ npx nx generate @nrwl/nest:service    app/users --project=api
 // [TODO] 生成された各種ファイルを編集
 
 # ---------------------------------------------------------
-# (5) CSVデータ
+# (5) libs/api-interfaces
+# ---------------------------------------------------------
+# (5)-1. 雛形で自動生成された不要ファイル削除
+$ rm -f libs/api-interfaces/src/lib/api-interfaces.ts
+
+# (5)-2. ファイル追加
+$ touch libs/api-interfaces/src/lib/user-item.ts
+$ touch libs/api-interfaces/src/lib/login-item.ts
+$ touch libs/api-interfaces/src/lib/error-item.ts
+// [TODO] 
+//   生成された各種ファイルを編集
+//   libs/api-interfaces/src/index.ts を修正
+
+# ---------------------------------------------------------
+# (6) CSVデータ
 # ---------------------------------------------------------
 $ mkdir data
 // [TODO] data/UserItemList.csv を用意
@@ -187,3 +198,6 @@ $ mkdir data
 - <a href="https://code-maze.com/angular-material-table/">Angular Material Table, Filtering, Sorting, Paging</a>
 - <a href="https://www.freakyjolly.com/angular-material-datatable-pagination-sorting-filter-and-fixed-columns-tutorial/">Angular Material 9|8 DataTable, Pagination, Sorting, Filter and Fixed Columns Tutorial</a>
 - <a href="https://www.mariokandut.com/how-to-translate-matpaginator-angular/">How to translate MatPaginator</a>
+- <a href="https://stackoverflow.com/questions/47257167/dynamically-change-header-string-in-angular-2">Dynamically change header string in angular 2</a>
+- <a href="https://javascript.plainenglish.io/angular-handle-http-errors-using-interceptors-5cc483103740">Angular: Handle HTTP Errors using Interceptors</a>
+
