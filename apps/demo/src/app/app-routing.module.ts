@@ -9,7 +9,7 @@ import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
 
 const errNotFound: ErrorItem = {
   errorCode: 404,
-  errorTarget: ErrorTarget.flontend
+  errorTarget: ErrorTarget.frontend
 }
 
 const routes: Routes = [

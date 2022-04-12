@@ -41,9 +41,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
          // this.router.navigate(['error'], {state: errItem});
 
             this.router.navigate(['error'], 
-                                {state: {errorCode: error.status,
-                                         errorMessage: error.message, 
-                                         errorTarget: ErrorTarget.backend}});
+                                 {state: 
+                                   {errorCode: error.status,
+                                    errorMessage: error.message, 
+                                    errorTarget: ErrorTarget.backend}});
           }
           console.log(errorMsg);
           return throwError(errorMsg);

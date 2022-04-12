@@ -12,7 +12,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeaderService } from '../../shared/header/header.service';
 import { FooterService } from "../../shared/footer/footer.service";
 import { UsersService } from "../users.service";
-import { UserItem } from '@nx-demo/api-interfaces';
+import { UserItem, GetUserItemArrayResponseBody } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 
 @Component({
@@ -58,7 +58,8 @@ export class UserListComponent implements OnInit, OnDestroy {
 
     // ユーザ一覧取得
     this.service.getUsers().subscribe(result => {
-      this.dataSource = new MatTableDataSource(result);
+      console.log('count:', result.count);
+      this.dataSource = new MatTableDataSource(result.item);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -91,6 +92,7 @@ export class UserListComponent implements OnInit, OnDestroy {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{
       data:{
+        title: '警告',
         message: '本機能は現状未サポートです。',
         buttonText: {
           cancel: 'OK'

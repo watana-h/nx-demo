@@ -9,7 +9,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeaderService } from '../../shared/header/header.service';
 import { FooterService } from '../../shared/footer/footer.service';
 import { UsersService } from "../users.service";
-import { UserItem } from '@nx-demo/api-interfaces';
+import { UserItem, GetUserItemResponseBody } from '@nx-demo/api-interfaces';
+import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 
 
@@ -44,10 +45,25 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
     if (paramId) {
       this.id = paramId;
-      this.service.getUser(this.id)
-        .subscribe(result => this.user = result);
+
+      this.service.getUser(this.id).subscribe(result => {
+        console.log('count:', result.count);
+        if (result.item != undefined && result.count == 1) {
+
+          this.user = result.item;
+        } else {
+          this.router.navigate(["error"],
+                                {state: 
+                                  {errorMessage: "対象IDデータが正しく取得できませんでした。",
+                                   errorTarget: ErrorTarget.backend }});
+        }
+      });
     } else {
-       this.router.navigate(["error"]);
+      console.log('id missing');
+      this.router.navigate(["error"],
+                            {state: 
+                              {errorMessage: "対象IDが指定されていません。",
+                               errorTarget: ErrorTarget.frontend }});
     }
   }
 
@@ -65,6 +81,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{
       data:{
+        title: '警告',
         message: '本機能は現状未サポートです。',
         buttonText: {
           cancel: 'OK'

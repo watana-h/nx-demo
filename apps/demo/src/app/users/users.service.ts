@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, retry, throwError, catchError } from 'rxjs';
 
-import { UserItem } from '@nx-demo/api-interfaces';
+import { UserItem,
+         GetUserItemArrayResponseBody,
+         GetUserItemResponseBody } from '@nx-demo/api-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +23,8 @@ export class UsersService {
    * @description 一覧取得
    * @returns users
    */
-  getUsers(): Observable<UserItem[]> {
-    return this.http.get<UserItem[]>('/api/users');
+  getUsers(): Observable<GetUserItemArrayResponseBody> {
+    return this.http.get<GetUserItemArrayResponseBody>('/api/users');
   }
 
 
@@ -32,8 +34,8 @@ export class UsersService {
    * @params id
    * @returns users
    */
-  getUser(id: string): Observable<UserItem> {
-    return this.http.get<UserItem>(`/api/users/${id}`);
+  getUser(id: string): Observable<GetUserItemResponseBody> {
+    return this.http.get<GetUserItemResponseBody>(`/api/users/${id}`);
   }
 
 /***

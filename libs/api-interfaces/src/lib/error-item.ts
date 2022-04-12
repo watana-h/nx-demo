@@ -3,7 +3,7 @@
  * @description 本システムのエラー情報を管理
 */
 export enum ErrorTarget {
-  flontend = '1',
+  frontend = '1',
   backend = '2',
   other = '0'
 }
