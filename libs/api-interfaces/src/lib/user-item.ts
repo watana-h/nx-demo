@@ -18,7 +18,8 @@ export interface UserItem {
  * @description HTTP RESPONSE (getUsers)
 */
 export interface GetUserItemArrayResponseBody {
-  count: number;          // 件数
+  status: number;         // 0:正常, 0以外はエラーコード(予定)
+  errmsg?: string;        // エラーメッセージ(予定)
   item?: UserItem[];
 }
 /**
@@ -26,6 +27,36 @@ export interface GetUserItemArrayResponseBody {
  * @description HTTP RESPONSE (getUser)
 */
 export interface GetUserItemResponseBody {
-  count: number;          // 件数
+  status: number;         // 0:正常, 0以外はエラーコード(予定)
+  errmsg?: string;        // エラーメッセージ(予定)
   item?: UserItem;
 }
+/**
+ * @name DeleteUserItemResponseBody
+ * @description HTTP RESPONSE (deleteUser)
+*/
+export interface DeleteUserItemResponseBody {
+  status: number;         // 0:正常, 0以外はエラーコード(予定)
+  errmsg?: string;        // エラーメッセージ(予定)
+}
+/**
+ * @name AppendUserItemResponseBody
+ * @description HTTP RESPONSE (appendUser)
+*/
+export interface AppendUserItemResponseBody {
+  status: number;         // 0:正常, 0以外はエラーコード(予定)
+  errmsg?: string;        // エラーメッセージ(予定)
+}
+/**
+ * @name UpdateUserItemResponseBody
+ * @description HTTP RESPONSE (updateUser)
+*/
+export interface UpdateUserItemResponseBody {
+  status: number;         // 0:正常, 0以外はエラーコード(予定)
+  errmsg?: string;        // エラーメッセージ(予定)
+}
+
+
+
+
+

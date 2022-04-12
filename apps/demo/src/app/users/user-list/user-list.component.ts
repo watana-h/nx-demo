@@ -13,6 +13,7 @@ import { HeaderService } from '../../shared/header/header.service';
 import { FooterService } from "../../shared/footer/footer.service";
 import { UsersService } from "../users.service";
 import { UserItem, GetUserItemArrayResponseBody } from '@nx-demo/api-interfaces';
+import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 
 @Component({
@@ -58,8 +59,17 @@ export class UserListComponent implements OnInit, OnDestroy {
 
     // ユーザ一覧取得
     this.service.getUsers().subscribe(result => {
-      console.log('count:', result.count);
-      this.dataSource = new MatTableDataSource(result.item);
+      console.log('status:', result.status);
+      if (result.item != undefined && result.status == 0) {
+        this.dataSource = new MatTableDataSource(result.item);
+      } else {
+          this.router.navigate(["error"],
+                                {state:
+                                  {errorMessage:
+                                    (result.errmsg) ? result.errmsg
+                                                    : "データが正しく取得できませんでした。",
+                                   errorTarget: ErrorTarget.backend }});
+      }
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 

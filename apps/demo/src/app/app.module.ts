@@ -21,12 +21,13 @@ import { AlertDialogComponent } from './shared/dialog/alert-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/error/error.component';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { ConfirmDialogComponent } from './shared/dialog/confirm-dialog.component';
 
 
 @NgModule({
   declarations: [AppComponent, NxWelcomeComponent, 
                  HeaderComponent, FooterComponent, UserListComponent, UserEditComponent, 
-                 AlertDialogComponent, LoginComponent, ErrorComponent],
+                 AlertDialogComponent, LoginComponent, ErrorComponent, ConfirmDialogComponent],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, 
             BrowserAnimationsModule, MaterialModule,
             FlexLayoutModule, 

@@ -12,6 +12,7 @@ import { UsersService } from "../users.service";
 import { UserItem, GetUserItemResponseBody } from '@nx-demo/api-interfaces';
 import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
+import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.component';
 
 
 @Component({
@@ -47,14 +48,17 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.id = paramId;
 
       this.service.getUser(this.id).subscribe(result => {
-        console.log('count:', result.count);
-        if (result.item != undefined && result.count == 1) {
+        console.log('status:', result.status);
+        console.log('item:', result.item);
+        if (result.item != undefined && result.status == 0) {
 
           this.user = result.item;
         } else {
           this.router.navigate(["error"],
                                 {state: 
-                                  {errorMessage: "対象IDデータが正しく取得できませんでした。",
+                                  {errorMessage: 
+                                    (result.errmsg) ? result.errmsg 
+                                                    : "対象IDデータが正しく取得できませんでした。",
                                    errorTarget: ErrorTarget.backend }});
         }
       });
@@ -90,4 +94,45 @@ export class UserEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * @name openDeleteConfirmDialog
+   * @description 削除確認ダイアログ表示
+   */
+  openDeleteConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: '削除確認',
+        message: '対象データを削除してよろしいでしょうか？',
+        buttonText: {
+          ok: 'はい', cancel: 'いいえ'
+        }
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // 削除実行を選択
+        this.service.deleteUser(this.id).subscribe(response => {
+          let dlgtitle = '処理結果';
+          let dlgmessage = '対象項目の削除処理が正常終了しました。';
+
+          if(response.status != 0) {
+            dlgmessage = '対象項目の削除処理がエラー終了しました。';
+          }
+          this.dialog.open(AlertDialogComponent,{
+            data:{
+              title: dlgtitle,
+              message: dlgmessage,
+              buttonText: {
+                cancel: 'OK'
+              }
+            },
+          });
+        });
+        // 一覧画面に戻る
+        this.router.navigate(["users/user-list"]);
+      }
+    });
+
+  }
 }
