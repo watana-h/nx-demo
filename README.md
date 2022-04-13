@@ -16,19 +16,19 @@ Nx (Angular-NestJS monorepo) サンプル
 Angular-NestJS お勉強で作成したサンプルアプリです。
 
 - バックエンド
-  - フロントエンドからのリクエストを受けて CSV 管理されている情報一覧をレスポンスする
+  - フロントエンドからのリクエストを受けて CSV 管理されている情報の取得/更新
 - フロントエンド
   - ワイヤーフレーム
     - Header, Main Content, Footer 構成
   - 画面構成
     - ログイン画面
-    - アカウント一覧
-    - アカウント編集
+    - 会社情報一覧
+    - 会社情報編集
     - エラー表示画面
   - 画面遷移
-    - ログイン画面で[ログイン]→アカウント一覧
-    - アカウント一覧画面の一覧[左列リンク]→アカウント編集
-    - アカウント編集画面[キャンセル]→アカウント一覧
+    - ログイン画面で[ログイン]→会社情報一覧
+    - 会社情報一覧の一覧[左列リンク]→会社情報編集
+    - 編会社情報集[キャンセル]→会社情報一覧
     - Header右端[ログアウト]→ログイン画面
 
 ## 実行手順
@@ -54,6 +54,15 @@ $ git clone https://github.com/watana-h/nx-demo.git
 $ cd nx-demo
 $ npm ci
 ```
+
+<a href="https://github.com/watana-h/nx-demo/releases">release</a>
+に記載した各段階で、v0.1～ とtag を設定しています。  
+下記のように -b で tag を指定することで、その時点のソースを取得できます。
+
+```
+$ git clone https://github.com/watana-h/nx-demo.git -b v0.1
+```
+
 ### 実行 - ターミナル利用
 ひとつのターミナルで api (NestJS) サービスを提供
 ```
@@ -148,7 +157,7 @@ $ npx nx generate service     shared/footer/footer         --flat --project=demo
 $ npx nx generate component   shared/dialog/alert-dialog   --flat --project=demo --module=app
 $ npx nx generate component   shared/dialog/confirm-dialog --flat --project=demo --module=app
 $ npx nx generate component   shared/error                 --project=demo --module=app
-$ npx nx generate interceptor shared/interceptors/HttpError --flat --project=demo
+$ npx nx generate interceptor shared/interceptors/http-error --flat --project=demo
 $ npx nx generate component   login           --project=demo --module=app
 $ npx nx generate component   users/user-edit --project=demo --module=app
 $ npx nx generate component   users/user-list --project=demo --module=app
