@@ -22,6 +22,11 @@ export class ConfirmDialogComponent {
         buttonText: {ok: string, cancel: string} },
     private dialogRef: MatDialogRef<ConfirmDialogComponent>) {
     if (data) {
+      // 条件分岐省略
+      // if (hoge) { bar = hoge; } else { bar = 'empty'; }
+      // ↓
+      // bar = hoge || 'empty';
+
       this.title = data.title || this.title;
       this.message = data.message || this.message;
       if (data.buttonText) {

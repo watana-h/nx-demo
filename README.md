@@ -7,6 +7,8 @@ Nx (Angular-NestJS monorepo) サンプル
 
 <img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-edit.png" width="600">
 
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/confirm.png" width="600">
+
 <img src="https://github.com/watana-h/nx-demo/blob/main/doc/error.png" width="600">
 
 
@@ -162,8 +164,9 @@ $ rm -f apps/api/src/app/app.controller.ts
 $ rm -f apps/api/src/app/app.service.spec.ts
 $ rm -f apps/api/src/app/app.service.ts
 
-# (4)-2. CSVパーサー導入
+# (4)-2. CSV操作導入
 $ npm install csv-parse
+$ npm install csv-stringify
 
 # (4)-3. バックエンドアプリ構築
 $ npx nx generate @nrwl/nest:module     app/users --project=api
@@ -193,12 +196,16 @@ $ mkdir data
 ```
 
 ## 参考情報
-- <a href="https://nanbu.marune205.net/2021/12/angular-login-page.html">Angularでログインページを作成する</a>
-- <a href="https://satolabo.net/2019/12/14/angular-typescript-sleep/">Angular8のtypescriptでsleep処理を実装する</a>
-- <a href="https://note.com/haru_hira/n/nbb25eadadee9">Angularでheaderコンポーネントを1部のモジュールで非表示にしたい時</a>
-- <a href="https://stackoverflow.com/questions/47257167/dynamically-change-header-string-in-angular-2">Dynamically change header string in angular 2</a>
-- <a href="https://code-maze.com/angular-material-table/">Angular Material Table, Filtering, Sorting, Paging</a>
-- <a href="https://www.freakyjolly.com/angular-material-datatable-pagination-sorting-filter-and-fixed-columns-tutorial/">Angular Material 9|8 DataTable, Pagination, Sorting, Filter and Fixed Columns Tutorial</a>
-- <a href="https://www.mariokandut.com/how-to-translate-matpaginator-angular/">How to translate MatPaginator</a>
-- <a href="https://javascript.plainenglish.io/angular-handle-http-errors-using-interceptors-5cc483103740">Angular: Handle HTTP Errors using Interceptors</a>
+- 技術情報
+  - <a href="https://nanbu.marune205.net/2021/12/angular-login-page.html">Angularでログインページを作成する</a>
+  - <a href="https://satolabo.net/2019/12/14/angular-typescript-sleep/">Angular8のtypescriptでsleep処理を実装する</a>
+  - <a href="https://note.com/haru_hira/n/nbb25eadadee9">Angularでheaderコンポーネントを1部のモジュールで非表示にしたい時</a>
+  - <a href="https://stackoverflow.com/questions/47257167/dynamically-change-header-string-in-angular-2">Dynamically change header string in angular 2</a>
+  - <a href="https://code-maze.com/angular-material-table/">Angular Material Table, Filtering, Sorting, Paging</a>
+  - <a href="https://www.freakyjolly.com/angular-material-datatable-pagination-sorting-filter-and-fixed-columns-tutorial/">Angular Material 9|8 DataTable, Pagination, Sorting, Filter and Fixed Columns Tutorial</a>
+  - <a href="https://www.mariokandut.com/how-to-translate-matpaginator-angular/">How to translate MatPaginator</a>
+  - <a href="https://stackabuse.com/reading-and-writing-csv-files-in-nodejs-with-node-csv/">Reading and Writing CSV Files in Node.js with node-csv</a>
 
+- アイコン、favicon生成
+  - <a href="https://www.iconfinder.com/iconsets/developerkit">Developer Kit icon pack</a>
+  - <a href="http://www.favicon.pro/">favicon.pro - favicon生成</a>

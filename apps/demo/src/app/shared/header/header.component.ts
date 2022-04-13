@@ -13,7 +13,7 @@ import { HeaderService } from './header.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  headerTitle = "受発注管理";
+  headerTitle = "契約会社管理";
   headerVisible: boolean = false; 
   logoutVisible: boolean = true;
 

@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.setVisible(true);
-    this.header.setTitle("受発注管理 - アカウント一覧");
+    this.header.setTitle("契約会社管理 - 一覧");
     this.header.setLogoutVisible(true);
     this.footer.setVisible(true);
 
@@ -60,8 +60,12 @@ export class UserListComponent implements OnInit, OnDestroy {
     // ユーザ一覧取得
     this.service.getUsers().subscribe(result => {
       console.log('status:', result.status);
-      if (result.item != undefined && result.status == 0) {
-        this.dataSource = new MatTableDataSource(result.item);
+      if (result.status == 0) {
+        // deleted="1"を除外
+        var enabledItem = result.item?.filter(function(item) {
+          return item.deleted != "1";
+        });
+        this.dataSource = new MatTableDataSource(enabledItem);
       } else {
           this.router.navigate(["error"],
                                 {state:

@@ -1,4 +1,10 @@
+.logo-wrapper {
+  height: 54px;
+  display: flex;
+  padding: 5px 0;
+  margin-right: 14px;
+}
 .spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
   

@@ -10,6 +10,7 @@ export interface UserItem {
   address?: string;
   account: string;
   password: string;
+  deleted: string;      // "1":deleted
 }
 
 

@@ -21,7 +21,7 @@ export class ErrorComponent implements OnInit, OnDestroy {
   eno?: number;
   message = baseMessage;
   target = baseTarget;
-  headerTitle = "受発注管理";
+  headerTitle = "契約会社管理";
 
   constructor(
     private header: HeaderService,
@@ -35,19 +35,18 @@ export class ErrorComponent implements OnInit, OnDestroy {
       const routeState = this.router?.getCurrentNavigation()?.extras.state;
       console.log(routeState);
       if (routeState){
-        // 下記はもっとエレガントな書き方があると思うけど...勉強不足
         const stateCode = routeState['errorCode'];
         if (stateCode) {
             this.eno = Number(stateCode);
         }
-        const stateMessage = routeState['errorMessage'];
-        if (stateMessage) {
-            this.message = stateMessage;
-        }
-        const stateTarget = routeState['errorTarget'];
-        if (stateTarget) {
-          this.target = stateTarget;
-        }
+
+        // 条件分岐省略
+        // if (hoge) { bar = hoge; } else { bar = 'empty'; }
+        // ↓
+        // bar = hoge || 'empty';
+
+        this.message = routeState['errorMessage'] || this.message;
+        this.target = routeState['errorTarget'] || this.target;
       }
     } else {
       // app-routing 経由

@@ -22,8 +22,8 @@ import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.compo
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   blnPassVisible = true;
-  public user: UserItem = { company: "", email: "", telephone: "", address: "",
-                            id: "", account: "", password: "" };
+  public user: UserItem = { id: "", company: "", email: "", telephone: "", address: "",
+                            account: "", password: "", deleted: "" };
   id: string = '';
 
   constructor(
@@ -37,7 +37,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.setVisible(true);
-    this.header.setTitle("受発注管理 - アカウント編集");
+    this.header.setTitle("契約会社管理 - 編集");
     this.header.setLogoutVisible(true);
     this.footer.setVisible(true);
   

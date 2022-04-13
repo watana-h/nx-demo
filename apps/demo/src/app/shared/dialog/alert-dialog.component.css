@@ -1,3 +1,6 @@
+.modal-wrapper {
+  min-width: 250px;
+}
 .navi-box {
   margin-top: 25px;
   width: 100%;
@@ -5,3 +8,7 @@
   justify-content: space-around;
   align-items: center;
 }
+.navi-button {
+  width: 100px;
+}
+
