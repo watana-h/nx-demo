@@ -1,15 +1,15 @@
 # nx-demo
 Nx (Angular-NestJS monorepo) サンプル
 
-<img src="https://github.com/watana-h/nx-demo/blob/main/doc/login.png" width="600">
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/v0.6/login.png" width="600">
 
-<img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-list.png" width="600">
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/v0.6/user-list.png" width="600">
 
-<img src="https://github.com/watana-h/nx-demo/blob/main/doc/user-edit.png" width="600">
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/v0.6/user-edit.png" width="600">
 
-<img src="https://github.com/watana-h/nx-demo/blob/main/doc/confirm.png" width="600">
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/v0.6/confirm.png" width="600">
 
-<img src="https://github.com/watana-h/nx-demo/blob/main/doc/error.png" width="600">
+<img src="https://github.com/watana-h/nx-demo/blob/main/doc/v0.6/error.png" width="600">
 
 
 ### 概要

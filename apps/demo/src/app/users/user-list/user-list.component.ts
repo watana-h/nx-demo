@@ -1,6 +1,6 @@
 /**
  * @name user-list.component
- * @description ユーザ一覧画面
+ * @description 会社情報一覧
 */
 import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.setVisible(true);
-    this.header.setTitle("契約会社管理 - 一覧");
+    this.header.setTitle("契約会社管理 - 会社情報一覧");
     this.header.setLogoutVisible(true);
     this.footer.setVisible(true);
 

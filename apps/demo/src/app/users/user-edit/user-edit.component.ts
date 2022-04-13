@@ -1,6 +1,6 @@
 /**
  * @name user-edit.component
- * @description ユーザ編集画面
+ * @description 会社情報編集
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,7 +37,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // header,footer表示
     this.header.setVisible(true);
-    this.header.setTitle("契約会社管理 - 編集");
+    this.header.setTitle("契約会社管理 - 会社情報編集");
     this.header.setLogoutVisible(true);
     this.footer.setVisible(true);
   
