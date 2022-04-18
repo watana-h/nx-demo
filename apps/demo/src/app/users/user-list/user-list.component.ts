@@ -99,9 +99,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * @name addUser
+   * @description 会社情報追加
+   */
+  addUser() {
+    this.router.navigate(["users/user-edit"]);
+  }
+
+  /**
    * @name openNotSupportedDialog
    * @description 未サポートダイアログ表示
    */
+/*** Un Used ****
   openNotSupportedDialog() {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{
@@ -114,5 +123,6 @@ export class UserListComponent implements OnInit, OnDestroy {
       },
     });
   }
+**** Un Used ***/
 
 }

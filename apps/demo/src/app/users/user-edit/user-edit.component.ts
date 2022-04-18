@@ -28,6 +28,7 @@ import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.compo
 })
 export class UserEditComponent implements OnInit, OnDestroy {
   blnPassVisible = true;
+  isUpdate = true;
   public user: UserItem = { id: "", company: "", email: "", telephone: "", address: "",
                             account: "", password: "", deleted: "" };
   id: string = '';
@@ -41,16 +42,20 @@ export class UserEditComponent implements OnInit, OnDestroy {
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // header,footer表示
-    this.header.setVisible(true);
-    this.header.setTitle("契約会社管理 - 会社情報編集");
-    this.header.setLogoutVisible(true);
-    this.footer.setVisible(true);
-  
     const paramId = this.route.snapshot.paramMap.get('id');
     console.log('id:', paramId);
 
-    if (paramId) {
+    // header,footer表示
+    this.header.setVisible(true);
+    this.header.setLogoutVisible(true);
+    this.footer.setVisible(true);
+  
+    if (!paramId) {
+      this.isUpdate = false;
+      this.header.setTitle("契約会社管理 - 会社情報追加");
+    } else {
+      this.isUpdate = true;
+      this.header.setTitle("契約会社管理 - 会社情報編集");
       this.id = paramId;
 
       this.service.getUser(this.id).subscribe(result => {
@@ -68,12 +73,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
                                    errorTarget: ErrorTarget.backend }});
         }
       });
-    } else {
-      console.log('id missing');
-      this.router.navigate(["error"],
-                            {state: 
-                              {errorMessage: "対象IDが指定されていません。",
-                               errorTarget: ErrorTarget.frontend }});
     }
   }
 
@@ -173,7 +172,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
    * @name openNotSupportedDialog
    * @description 未サポートダイアログ表示
    */
-/*** UnUsed ****
   openNotSupportedDialog() {
  // const dialogRef = this.dialog.open(AlertDialogComponent,{
     this.dialog.open(AlertDialogComponent,{
@@ -186,6 +184,5 @@ export class UserEditComponent implements OnInit, OnDestroy {
       },
     });
   }
-**** UnUsed ***/
 
 }

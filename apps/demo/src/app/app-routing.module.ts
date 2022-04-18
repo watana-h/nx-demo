@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'users/user-list', component: UserListComponent },
-  { path: 'users/user-edit/:id', component: UserEditComponent },
+  { path: 'users/user-edit', component: UserEditComponent },     // 追加
+  { path: 'users/user-edit/:id', component: UserEditComponent }, // 更新
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent, data: errNotFound }
 ];

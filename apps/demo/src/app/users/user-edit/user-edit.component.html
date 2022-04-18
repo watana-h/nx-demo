@@ -75,23 +75,35 @@
 
     <!-- ボタン -->
     <div class="navi-box">
-      <button class="navi-button" mat-raised-button color="primary"
-        matTooltip="アカウント情報を更新します。" (click)="openUpdateConfirmDialog()">
-        <mat-icon>update</mat-icon>
-        &nbsp;更新
-      </button>
-
-      <button class="navi-button" mat-raised-button color="warn"
-        matTooltip="アカウント情報を削除します。" (click)="openDeleteConfirmDialog()">
-        <mat-icon>delete</mat-icon>
-        &nbsp;削除
-      </button>
-
-      <button class="navi-button" mat-raised-button
-        matTooltip="編集をやめて一覧に戻ります。" [routerLink]="['/users/user-list']">
-        <mat-icon>cancel</mat-icon>
-        &nbsp;キャンセル
-      </button>
+      <ng-container *ngIf="isUpdate; else isAppend">
+        <button class="navi-button" mat-raised-button color="primary"
+          matTooltip="会社情報を更新します。" (click)="openUpdateConfirmDialog()">
+          <mat-icon>update</mat-icon>
+          &nbsp;更新
+        </button>
+        <button class="navi-button" mat-raised-button color="warn"
+          matTooltip="会社情報を削除します。" (click)="openDeleteConfirmDialog()">
+          <mat-icon>delete</mat-icon>
+          &nbsp;削除
+        </button>
+        <button class="navi-button" mat-raised-button
+          matTooltip="編集をやめて一覧に戻ります。" [routerLink]="['/users/user-list']">
+          <mat-icon>cancel</mat-icon>
+          &nbsp;キャンセル
+        </button>
+      </ng-container>
+      <ng-template #isAppend>
+        <button class="navi-button" mat-raised-button color="primary"
+          matTooltip="会社情報を追加します。" (click)="openNotSupportedDialog()">
+          <mat-icon>add</mat-icon>
+          &nbsp;追加
+        </button>
+        <button class="navi-button" mat-raised-button
+          matTooltip="編集をやめて一覧に戻ります。" [routerLink]="['/users/user-list']">
+          <mat-icon>cancel</mat-icon>
+          &nbsp;キャンセル
+        </button>
+      </ng-template>
     </div>
 
   </form>
