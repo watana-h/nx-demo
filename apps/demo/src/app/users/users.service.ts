@@ -10,7 +10,9 @@ import { UserItem,
          GetUserItemArrayResponseBody,
          GetUserItemResponseBody,
          DeleteUserItemResponseBody,
+         AppendUserItemRequestBody,
          AppendUserItemResponseBody,
+         UpdateUserItemRequestBody,
          UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
 
 @Injectable({
@@ -51,23 +53,23 @@ export class UsersService {
   }
 
   /**
-   * @name appendUser
-   * @description 情報追加
-   * @params UserItem
-   * @returns AppendUserItemResponseBody
-   */
-//appendUser(user: UserItem): Observable<AppendUserItemResponseBody> {
-//  return this.http.post<AppendUserItemResponseBody>('/api/users', user);
-//}
-
-  /**
    * @name updateUser
-   * @description 情報更新
-   * @params UserItem
+   * @description 対象idの情報更新
+   * @params  UpdataUserItemRequestBody
    * @returns UpdateUserItemResponseBody
    */
-//updateUser(user: UserItem): Observable<UpdateUserItemResponseBody> {
-//  return this.http.post<UpdateUserItemResponseBody>('/api/users/${user.id}', user);
-//}
+  updateUser(body: UpdateUserItemRequestBody): Observable<UpdateUserItemResponseBody> {
+    return this.http.post<UpdateUserItemResponseBody>('/api/users/update', body);
+  }
+
+  /**
+   * @name appendUser
+   * @description 情報追加
+   * @params  AppendUserItemRequestBody
+   * @returns AppendUserItemResponseBody
+   */
+  appendUser(body: AppendUserItemRequestBody): Observable<AppendUserItemResponseBody> {
+    return this.http.post<AppendUserItemResponseBody>('/api/users/append', body);
+  }
 
 }

@@ -41,12 +41,26 @@ export interface DeleteUserItemResponseBody {
   errmsg?: string;        // エラーメッセージ(予定)
 }
 /**
+ * @name AppendUserItemRequestBody
+ * @description HTTP REQUEST (appendUser)
+*/
+export interface AppendUserItemRequestBody {
+  item: UserItem;         // item.id バックエンドで自動発番
+}
+/**
  * @name AppendUserItemResponseBody
  * @description HTTP RESPONSE (appendUser)
 */
 export interface AppendUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
   errmsg?: string;        // エラーメッセージ(予定)
+}
+/**
+ * @name UpdateUserItemRequestBody
+ * @description HTTP REQUEST (updateUser)
+*/
+export interface UpdateUserItemRequestBody {
+  item: UserItem;         // item.id をキーとして更新
 }
 /**
  * @name UpdateUserItemResponseBody
@@ -56,8 +70,5 @@ export interface UpdateUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
   errmsg?: string;        // エラーメッセージ(予定)
 }
-
-
-
 
 

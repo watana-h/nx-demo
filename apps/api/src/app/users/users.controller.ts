@@ -1,10 +1,12 @@
-import { Controller, Get, Delete, Post, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, Delete, Post, Body, HttpCode, HttpStatus, Param } from '@nestjs/common';
 
 import { UserItem, 
          GetUserItemArrayResponseBody, 
          GetUserItemResponseBody,
          DeleteUserItemResponseBody,
+         AppendUserItemRequestBody,
          AppendUserItemResponseBody,
+         UpdateUserItemRequestBody,
          UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
 import { UsersService } from './users.service';
 
@@ -39,5 +41,25 @@ export class UsersController {
   @HttpCode(HttpStatus.OK) 
   deleteUser(@Param('id') id: string): DeleteUserItemResponseBody {
     return this.usersService.deleteUser(id)
+  }
+
+  /**
+   * @description 対象idの情報更新
+   * @params UpdateUserItemRequestBody
+   */
+  @Post('update')
+  @HttpCode(HttpStatus.OK) 
+  updateUser(@Body() body: UpdateUserItemRequestBody): UpdateUserItemResponseBody {
+    return this.usersService.updateUser(body)
+  }
+
+  /**
+   * @description 情報追加
+   * @params AppendUserItemRequestBody
+   */
+  @Post('append')
+  @HttpCode(HttpStatus.OK) 
+  appendUser(@Body() body: AppendUserItemRequestBody): AppendUserItemResponseBody {
+    return this.usersService.appendUser(body)
   }
 }

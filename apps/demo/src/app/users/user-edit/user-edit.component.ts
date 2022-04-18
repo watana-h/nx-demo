@@ -9,7 +9,13 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeaderService } from '../../shared/header/header.service';
 import { FooterService } from '../../shared/footer/footer.service';
 import { UsersService } from "../users.service";
-import { UserItem, GetUserItemResponseBody } from '@nx-demo/api-interfaces';
+import { UserItem, 
+         GetUserItemResponseBody,
+         DeleteUserItemResponseBody,
+         AppendUserItemRequestBody,
+         AppendUserItemResponseBody,
+         UpdateUserItemRequestBody,
+         UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
 import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
 import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.component';
@@ -77,22 +83,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.footer.setVisible(true);
   }
 
-  /**
-   * @name openNotSupportedDialog
-   * @description 未サポートダイアログ表示
-   */
-  openNotSupportedDialog() {
- // const dialogRef = this.dialog.open(AlertDialogComponent,{
-    this.dialog.open(AlertDialogComponent,{
-      data:{
-        title: '警告',
-        message: '本機能は現状未サポートです。',
-        buttonText: {
-          cancel: 'OK'
-        }
-      },
-    });
-  }
 
   /**
    * @name openDeleteConfirmDialog
@@ -133,6 +123,69 @@ export class UserEditComponent implements OnInit, OnDestroy {
         this.router.navigate(["users/user-list"]);
       }
     });
-
   }
+
+  /**
+   * @name openUpdateConfirmDialog
+   * @description 更新確認ダイアログ表示
+   */
+  openUpdateConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: '更新確認',
+        message: '対象データを更新してよろしいでしょうか？',
+        buttonText: {
+          ok: 'はい', cancel: 'いいえ'
+        }
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // 更新実行を選択
+        const body: UpdateUserItemRequestBody = {
+           item: this.user
+        };
+        this.service.updateUser(body).subscribe(response => {
+          let dlgtitle = '処理結果';
+          let dlgmessage = '対象項目の更新処理が正常終了しました。';
+
+          if(response.status != 0) {
+            dlgmessage = '対象項目の更新処理がエラー終了しました。';
+          }
+          this.dialog.open(AlertDialogComponent,{
+            data:{
+              title: dlgtitle,
+              message: dlgmessage,
+              buttonText: {
+                cancel: 'OK'
+              }
+            },
+          });
+        });
+        // 一覧画面に戻る
+        this.router.navigate(["users/user-list"]);
+      }
+    });
+  }
+
+  /**
+   * @name openNotSupportedDialog
+   * @description 未サポートダイアログ表示
+   */
+/*** UnUsed ****
+  openNotSupportedDialog() {
+ // const dialogRef = this.dialog.open(AlertDialogComponent,{
+    this.dialog.open(AlertDialogComponent,{
+      data:{
+        title: '警告',
+        message: '本機能は現状未サポートです。',
+        buttonText: {
+          cancel: 'OK'
+        }
+      },
+    });
+  }
+**** UnUsed ***/
+
 }

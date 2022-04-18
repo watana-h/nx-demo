@@ -3,7 +3,9 @@ import { UserItem,
          GetUserItemArrayResponseBody,
          GetUserItemResponseBody,
          DeleteUserItemResponseBody,
+         AppendUserItemRequestBody,
          AppendUserItemResponseBody,
+         UpdateUserItemRequestBody,
          UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
 
 import { join } from 'path';
@@ -13,23 +15,22 @@ import { parse } from 'csv-parse/sync'
 import { stringify } from 'csv-stringify';
 
 
-
 @Injectable()
 export class UsersService {
   private users: UserItem[] = [];
 
-  constructor() {}
+  constructor() { }
 
   /**
    * @name loadUsers
    * @description CSVファイルを users に読み込む
    */
   loadUsers() { 
-    const FILE = join(resolve(), 'data/UserItemList.csv');
-    console.log('loadUsers:file=', FILE);
+    const csvFile = join(resolve(), 'data/UserItemList.csv');
+//  console.log('loadUsers:file=', csvFile);
 
     // CSVロード&解析
-    const data = readFileSync(FILE);
+    const data = readFileSync(csvFile);
     const records = parse(data, {columns: true, trim: true});
 
     // 配列(users)を全クリア
@@ -58,14 +59,14 @@ export class UsersService {
    * @description users を CSV に書き出す
    */
   saveUsers() { 
-    const FILE = join(resolve(), 'data/UserItemList.csv');
-    console.log('saveUsers:file=', FILE);
+    const csvFile = join(resolve(), 'data/UserItemList.csv');
+//  console.log('saveUsers:file=', csvFile);
 
     if (this.users) {
       stringify(this.users,
         { header: true, quoted_string: true}, 
         function(err, output) {
-          writeFileSync(FILE, output);
+          writeFileSync(csvFile, output);
       });
     }
   }
@@ -124,7 +125,48 @@ export class UsersService {
       this.saveUsers();
     }
 
+    const res: DeleteUserItemResponseBody = {status: index >= 0 ? 0 : 1};
+    return res;
+  }
+
+  /**
+   * @name updateUser
+   * @description 対象idの情報更新
+   * @params  UpdateUserItemRequestBody
+   * @returns UpdateUserItemResponseBody
+   */
+  updateUser(body: UpdateUserItemRequestBody): UpdateUserItemResponseBody {
+    console.log('updateUser:id=', body.item.id);
+    this.loadUsers();
+
+    const index = this.users.findIndex(item => item.id == body.item.id);
+    if (index >= 0) {
+      this.users[index].company   = body.item.company;
+      this.users[index].email     = body.item.email;
+      this.users[index].telephone = body.item.telephone;
+      this.users[index].address   = body.item.address;
+      this.users[index].account   = body.item.account;
+      this.users[index].password  = body.item.password;
+      this.saveUsers();
+    }
+
     const res: UpdateUserItemResponseBody = {status: index >= 0 ? 0 : 1};
+    return res;
+  }
+
+  /**
+   * @name appendUser
+   * @description 情報追加
+   * @params  AppendUserItemRequestBody
+   * @returns AppendUserItemResponseBody
+   */
+  appendUser(body: AppendUserItemRequestBody): AppendUserItemResponseBody {
+    console.log('appendUser:id=', 'hogehoge');
+
+    // TODO
+
+
+    const res: AppendUserItemResponseBody = {status: 0};
     return res;
   }
 
