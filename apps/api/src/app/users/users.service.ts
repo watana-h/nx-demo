@@ -161,10 +161,28 @@ export class UsersService {
    * @returns AppendUserItemResponseBody
    */
   appendUser(body: AppendUserItemRequestBody): AppendUserItemResponseBody {
-    console.log('appendUser:id=', 'hogehoge');
+    // 現時点 id の最大値
+    let initialVals = 0;
+    let maxVals = this.users.reduce(
+      (previousValue, currentItem) => Math.max(previousValue, Number(currentItem.id)), initialVals
+    )
 
-    // TODO
+    // ゼロパディング文字列
+    let newId = ('0000' + (maxVals + 1)).slice(-4);
+    console.log('appendUser:id=', newId);
 
+    // 追加
+    let newItem : UserItem = 
+	{id: newId, 
+         company: body.item.company,
+         email: body.item.email, 
+         telephone: body.item.telephone,
+         address: body.item.address, 
+         account: body.item.account,
+         password: body.item.password, 
+         deleted: "0" };
+    this.users.push(newItem);
+    this.saveUsers();
 
     const res: AppendUserItemResponseBody = {status: 0};
     return res;

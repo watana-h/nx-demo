@@ -168,6 +168,51 @@ export class UserEditComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  /**
+   * @name openAppendConfirmDialog
+   * @description 追加確認ダイアログ表示
+   */
+  openAppendConfirmDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data:{
+        title: '追加確認',
+        message: '対象データを追加してよろしいでしょうか？',
+        buttonText: {
+          ok: 'はい', cancel: 'いいえ'
+        }
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // 追加実行を選択
+        const body: AppendUserItemRequestBody = {
+           item: this.user
+        };
+        this.service.appendUser(body).subscribe(response => {
+          let dlgtitle = '処理結果';
+          let dlgmessage = '対象項目の追加処理が正常終了しました。';
+
+          if(response.status != 0) {
+            dlgmessage = '対象項目の更新処理がエラー終了しました。';
+          }
+          this.dialog.open(AlertDialogComponent,{
+            data:{
+              title: dlgtitle,
+              message: dlgmessage,
+              buttonText: {
+                cancel: 'OK'
+              }
+            },
+          });
+        });
+        // 一覧画面に戻る
+        this.router.navigate(["users/user-list"]);
+      }
+    });
+  }
+
   /**
    * @name openNotSupportedDialog
    * @description 未サポートダイアログ表示

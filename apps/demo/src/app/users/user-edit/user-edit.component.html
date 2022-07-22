@@ -5,7 +5,7 @@
   -->
   
   <!-- 編集エリア -->
-  <form novalidate>
+  <form #formCheck="ngForm">
     <div class="form-box">
       <div id="contents" *ngIf="user">
 
@@ -77,7 +77,9 @@
     <div class="navi-box">
       <ng-container *ngIf="isUpdate; else isAppend">
         <button class="navi-button" mat-raised-button color="primary"
-          matTooltip="会社情報を更新します。" (click)="openUpdateConfirmDialog()">
+          matTooltip="会社情報を更新します。"
+          (click)="openUpdateConfirmDialog()"
+          [disabled]="formCheck.invalid" >
           <mat-icon>update</mat-icon>
           &nbsp;更新
         </button>
@@ -94,7 +96,9 @@
       </ng-container>
       <ng-template #isAppend>
         <button class="navi-button" mat-raised-button color="primary"
-          matTooltip="会社情報を追加します。" (click)="openNotSupportedDialog()">
+          matTooltip="会社情報を追加します。" 
+          (click)="openAppendConfirmDialog()"
+          [disabled]="formCheck.invalid" >
           <mat-icon>add</mat-icon>
           &nbsp;追加
         </button>
