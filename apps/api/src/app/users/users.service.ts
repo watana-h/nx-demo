@@ -40,14 +40,14 @@ export class UsersService {
     for (const record of records) {
       // console.log(record);
 
-      if( record['id'] !== undefined
-       && record['company'] !== undefined
-       && record['email'] !== undefined
-       && record['telephone'] !== undefined
-       && record['address'] !== undefined
-       && record['account'] !== undefined
-       && record['password'] !== undefined
-       && record['deleted'] !== undefined) {
+      if( typeof record['id'] !== "undefined"
+       && typeof record['company'] !== "undefined"
+       && typeof record['email'] !== "undefined"
+       && typeof record['telephone'] !== "undefined"
+       && typeof record['address'] !== "undefined"
+       && typeof record['account'] !== "undefined"
+       && typeof record['password'] !== "undefined"
+       && typeof record['deleted'] !== "undefined") {
           // console.log('record match');
           this.users.push(record);
       }
