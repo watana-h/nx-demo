@@ -49,8 +49,8 @@ export class UserListComponent implements OnInit, OnDestroy {
       if (length === 0 || pageSize === 0) { return `${length} 件中 0`; }
 
       length = Math.max(length, 0);
-      const startIndex = page * pageSize;
-      const endIndex = startIndex < length ?
+      const startIndex: number = page * pageSize;
+      const endIndex: number = startIndex < length ?
         Math.min(startIndex + pageSize, length) :
         startIndex + pageSize;
   
@@ -62,7 +62,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       console.log('status:', result.status);
       if (result.status == 0) {
         // deleted="1"を除外
-        var enabledItem = result.item?.filter(function(item) {
+        const enabledItem = result.item?.filter(function(item) {
           return item.deleted != "1";
         });
         this.dataSource = new MatTableDataSource(enabledItem);

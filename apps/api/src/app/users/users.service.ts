@@ -26,7 +26,7 @@ export class UsersService {
    * @description CSVファイルを users に読み込む
    */
   loadUsers() { 
-    const csvFile = join(resolve(), 'data/UserItemList.csv');
+    const csvFile: string = join(resolve(), 'data/UserItemList.csv');
 //  console.log('loadUsers:file=', csvFile);
 
     // CSVロード&解析
@@ -59,7 +59,7 @@ export class UsersService {
    * @description users を CSV に書き出す
    */
   saveUsers() { 
-    const csvFile = join(resolve(), 'data/UserItemList.csv');
+    const csvFile: string = join(resolve(), 'data/UserItemList.csv');
 //  console.log('saveUsers:file=', csvFile);
 
     if (this.users) {
@@ -78,14 +78,14 @@ export class UsersService {
    */
   getUsers(): GetUserItemArrayResponseBody {
     this.loadUsers();
-    const allcount = (this.users) ? this.users.length : 'empty';
+    const allcount: number = (this.users) ? this.users.length : 0;
     console.log('getUsers:件数=', allcount);
 
     if (allcount > 0) {
       const deleted = this.users.filter(function(item) {
         return item.deleted == "1";
       });
-      console.log('削除件数=', (deleted) ? deleted.length : 'empty');
+      console.log('削除件数=', (deleted) ? deleted.length : 0);
     }
 
     const res: GetUserItemArrayResponseBody = {status: 0,
@@ -103,7 +103,7 @@ export class UsersService {
     console.log('getUser:id=', id);
     this.loadUsers();
 
-    var result = this.users.find(value => value.id == id );
+    const result: UserItem = this.users.find(value => value.id == id );
     const res: GetUserItemResponseBody = {status: (result) ? 0 : 1, 
                                           item: result};
     return res;
@@ -119,7 +119,7 @@ export class UsersService {
     console.log('deleteUser:id=', id);
     this.loadUsers();
 
-    const index = this.users.findIndex(item => item.id == id);
+    const index: number = this.users.findIndex(item => item.id == id);
     if (index >= 0) {
       this.users[index].deleted = "1";
       this.saveUsers();
@@ -139,7 +139,7 @@ export class UsersService {
     console.log('updateUser:id=', body.item.id);
     this.loadUsers();
 
-    const index = this.users.findIndex(item => item.id == body.item.id);
+    const index: number = this.users.findIndex(item => item.id == body.item.id);
     if (index >= 0) {
       this.users[index].company   = body.item.company;
       this.users[index].email     = body.item.email;
@@ -162,17 +162,17 @@ export class UsersService {
    */
   appendUser(body: AppendUserItemRequestBody): AppendUserItemResponseBody {
     // 現時点 id の最大値
-    let initialVals = 0;
-    let maxVals = this.users.reduce(
+    const initialVals: number = 0;
+    const maxVals: number = this.users.reduce(
       (previousValue, currentItem) => Math.max(previousValue, Number(currentItem.id)), initialVals
     )
 
     // ゼロパディング文字列
-    let newId = ('0000' + (maxVals + 1)).slice(-4);
+    const newId: string = ('0000' + (maxVals + 1)).slice(-4);
     console.log('appendUser:id=', newId);
 
     // 追加
-    let newItem : UserItem = 
+    const newItem : UserItem = 
 	{id: newId, 
          company: body.item.company,
          email: body.item.email, 

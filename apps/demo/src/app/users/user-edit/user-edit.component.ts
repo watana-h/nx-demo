@@ -102,8 +102,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
       if(result) {
         // 削除実行を選択
         this.service.deleteUser(this.id).subscribe(response => {
-          let dlgtitle = '処理結果';
-          let dlgmessage = '対象項目の削除処理が正常終了しました。';
+          const dlgtitle: string = '処理結果';
+          let dlgmessage: string = '対象項目の削除処理が正常終了しました。';
 
           if(response.status != 0) {
             dlgmessage = '対象項目の削除処理がエラー終了しました。';
@@ -146,8 +146,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
            item: this.user
         };
         this.service.updateUser(body).subscribe(response => {
-          let dlgtitle = '処理結果';
-          let dlgmessage = '対象項目の更新処理が正常終了しました。';
+          const dlgtitle: string = '処理結果';
+          let dlgmessage: string = '対象項目の更新処理が正常終了しました。';
 
           if(response.status != 0) {
             dlgmessage = '対象項目の更新処理がエラー終了しました。';
@@ -191,8 +191,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
            item: this.user
         };
         this.service.appendUser(body).subscribe(response => {
-          let dlgtitle = '処理結果';
-          let dlgmessage = '対象項目の追加処理が正常終了しました。';
+          const dlgtitle: string = '処理結果';
+          let dlgmessage: string = '対象項目の追加処理が正常終了しました。';
 
           if(response.status != 0) {
             dlgmessage = '対象項目の更新処理がエラー終了しました。';
