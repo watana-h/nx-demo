@@ -61,7 +61,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
       this.service.getUser(this.id).subscribe(result => {
         console.log('status:', result.status);
         console.log('item:', result.item);
-        if (result.item != undefined && result.status == 0) {
+        if (result.item !== undefined && result.status == 0) {
 
           this.user = result.item;
         } else {

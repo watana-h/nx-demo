@@ -63,12 +63,12 @@ export class ErrorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const targetTitle = errorTargetTbls.find(item => item.id == this.target)?.title;
-    if (targetTitle != undefined) {
+    if (targetTitle !== undefined) {
       this.headerTitle = targetTitle;
     }
     if (this.eno) {
       const enoMessage = errorResponseTbls.find(item => item.code == this.eno)?.title;
-      if (enoMessage != undefined) {
+      if (enoMessage !== undefined) {
         this.message = enoMessage;
       }
     }
