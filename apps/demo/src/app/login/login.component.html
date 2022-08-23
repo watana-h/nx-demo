@@ -26,13 +26,13 @@
             <mat-label>パスワード（必須）</mat-label>
             <input matInput
               formControlName="password"
-              placeholder="6-20文字の英数字と一部記号(.@-_)"
+              placeholder="6-30文字の英数字と一部記号(.@-_)"
               [type]="blnPassVisible ? 'password' : 'text'" />
             <mat-icon class="pointer" matSuffix (click)="blnPassVisible = !blnPassVisible">{{blnPassVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
             <mat-error *ngIf="loginForm.controls['password'].errors?.['required']">パスワードを空白にはできません。</mat-error>
             <mat-error *ngIf="loginForm.controls['password'].errors?.['pattern']">半角英数字と一部記号(.@_-)のみ入力可能です。</mat-error>
             <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength']">パスワード最小文字数は6文字です。</mat-error>
-            <mat-error *ngIf="loginForm.controls['password'].errors?.['maxlength']">パスワード最大文字数は20文字です。</mat-error>
+            <mat-error *ngIf="loginForm.controls['password'].errors?.['maxlength']">パスワード最大文字数は30文字です。</mat-error>
           </mat-form-field>
         </div>
         <!-- loginFormのinvalidプロパティに各項目のバリデーションの総合結果が自動的に入ります -->

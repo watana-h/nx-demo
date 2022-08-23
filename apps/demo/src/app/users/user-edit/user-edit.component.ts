@@ -3,6 +3,7 @@
  * @description 会社情報編集
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -33,12 +34,38 @@ export class UserEditComponent implements OnInit, OnDestroy {
                             account: "", password: "", deleted: "" };
   id: string = '';
 
+  ptnTelephone = "^[0-9-]+$";
+  ptnEmail = "^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$";
+  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";
+
+  userForm = this.fb.group({
+    id:[{value: '', disabled: true}],
+    company:['', Validators.required],
+    telephone:['',
+      [Validators.required,
+       Validators.pattern(this.ptnTelephone)]],
+    email:['',
+      [Validators.required,
+       Validators.pattern(this.ptnEmail)]],
+    address:[''],
+    account:['',
+      [Validators.required,
+       Validators.pattern(this.ptnAnk)]],
+    password:['',
+      [Validators.required,
+       Validators.pattern(this.ptnAnk),
+       Validators.minLength(6),
+       Validators.maxLength(30)]],
+  });
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private header: HeaderService,
     private footer: FooterService,
     private service: UsersService,
+    private fb: FormBuilder,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {

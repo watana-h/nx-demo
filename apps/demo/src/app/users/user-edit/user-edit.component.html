@@ -5,7 +5,7 @@
   -->
   
   <!-- 編集エリア -->
-  <form #formCheck="ngForm">
+  <form [formGroup]="userForm" #formCheck="ngForm" (keydown.enter)="$event.preventDefault()" autocomplete="off">
     <div class="form-box">
       <div id="contents" *ngIf="user">
 
@@ -13,7 +13,9 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>ID（編集不可）</mat-label>
-            <input class="item-input" matInput disabled="" name="id" [(ngModel)]="user.id">
+            <input matInput class="item-input" name="id" readonly
+              formControlName="id"
+              [(ngModel)]="user.id" />
           </mat-form-field>
         </div>
 
@@ -21,7 +23,10 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>会社名（必須）</mat-label>
-            <input class="item-input" matInput name="company" required [(ngModel)]="user.company">
+            <input matInput class="item-input" name="company"
+              formControlName="company"
+              placeholder="〇〇株式会社"
+              [(ngModel)]="user.company" />
             <mat-error>必須項目なので必ず入力してください。</mat-error>
           </mat-form-field>
         </div>
@@ -30,8 +35,12 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>電話番号（必須）</mat-label>
-            <input class="item-input" matInput name="telephone" required [(ngModel)]="user.telephone">
-            <mat-error>必須項目なので必ず入力してください。</mat-error>
+            <input matInput class="item-input" name="telephone"
+              formControlName="telephone"
+              placeholder="090-1111-1111"
+              [(ngModel)]="user.telephone" />
+            <mat-error *ngIf="userForm.controls['telephone'].errors?.['required']">必須項目なので必ず入力してください。</mat-error>
+            <mat-error *ngIf="userForm.controls['telephone'].errors?.['pattern']">半角数字と一部記号(-)のみ入力可能です。</mat-error>
           </mat-form-field>
         </div>
 
@@ -39,8 +48,12 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>メールアドレス（必須）</mat-label>
-            <input class="item-input" matInput name="email" required [(ngModel)]="user.email">
-            <mat-error>必須項目なので必ず入力してください。</mat-error>
+            <input matInput class="item-input" name="email"
+              formControlName="email"
+              placeholder="hoge@example.com"
+              [(ngModel)]="user.email" />
+            <mat-error *ngIf="userForm.controls['email'].errors?.['required']">必須項目なので必ず入力してください。</mat-error>
+            <mat-error *ngIf="userForm.controls['email'].errors?.['pattern']">メールアドレス形式(hoge@example.com)のみ入力可能です。</mat-error>
           </mat-form-field>
         </div>
 
@@ -48,7 +61,10 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>住所</mat-label>
-            <input class="item-input" matInput name="address" [(ngModel)]="user.address">
+            <input matInput class="item-input" name="address"
+              formControlName="address"
+              placeholder="東京都〇〇区△△..."
+              [(ngModel)]="user.address" />
           </mat-form-field>
         </div>
 
@@ -56,17 +72,29 @@
         <div>
           <mat-form-field class="item-box" appearance="standard">
             <mat-label>アカウント（必須）</mat-label>
-            <input class="item-input" matInput name="account" required [(ngModel)]="user.account">
+            <input matInput class="item-input" name="account"
+              formControlName="account"
+              placeholder="hoge@example.com"
+              [(ngModel)]="user.account">
+            <mat-error *ngIf="userForm.controls['account'].errors?.['required']">必須項目なので必ず入力してください。</mat-error>
+            <mat-error *ngIf="userForm.controls['account'].errors?.['pattern']">半角英数字と一部記号(.@-_)のみ入力可能です。</mat-error>
           </mat-form-field>
         </div>
 
         <!-- password -->
         <div>
           <mat-form-field class="item-box" appearance="standard">
-            <mat-label>パスワード（必須）</mat-label>
-            <input class="item-input" matInput name="password" 
-              [type]="blnPassVisible ? 'password' : 'text'"  required [(ngModel)]="user.password">
+            <mat-label>パスワード（必須: 6-30文字）</mat-label>
+            <input matInput class="item-input" name="password"
+              formControlName="password"
+              placeholder="6-30文字の英数字と一部記号(.@-_)"
+              [type]="blnPassVisible ? 'password' : 'text'"
+              [(ngModel)]="user.password" />
             <mat-icon class="pointer" matSuffix (click)="blnPassVisible = !blnPassVisible">{{blnPassVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="userForm.controls['password'].errors?.['required']">必須項目なので必ず入力してください。</mat-error>
+            <mat-error *ngIf="userForm.controls['password'].errors?.['pattern']">半角英数字と一部記号(.@-_)のみ入力可能です。</mat-error>
+            <mat-error *ngIf="userForm.controls['password'].errors?.['minlength']">パスワード最小文字数は6文字です。</mat-error>
+            <mat-error *ngIf="userForm.controls['password'].errors?.['maxlength']">パスワード最大文字数は20文字です。</mat-error>
           </mat-form-field>
         </div>
 
