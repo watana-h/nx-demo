@@ -3,7 +3,7 @@
  * @description ログイン画面
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
@@ -26,10 +26,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   blnLoading = false;
   strLoadingMsg = "ログイン処理中です";
+  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";          // 半角英数字と一部記号(.@_-)
     
   loginForm = this.fb.group({
-    user:[''],
-    password:[''],
+    user:['',
+        [Validators.required,
+         Validators.pattern(this.ptnAnk)]],
+    password:['',
+        [Validators.required,
+         Validators.pattern(this.ptnAnk),
+         Validators.minLength(6),
+         Validators.maxLength(20)]],
   });
 
   constructor(
