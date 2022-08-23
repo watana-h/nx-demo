@@ -5,7 +5,7 @@
   -->
   
   <!-- 編集エリア -->
-  <form [formGroup]="userForm" #formCheck="ngForm" (keydown.enter)="$event.preventDefault()" autocomplete="off">
+  <form [formGroup]="userForm" (keydown.enter)="$event.preventDefault()" autocomplete="off">
     <div class="form-box">
       <div id="contents" *ngIf="user">
 
@@ -107,7 +107,7 @@
         <button class="navi-button" mat-raised-button color="primary"
           matTooltip="会社情報を更新します。"
           (click)="openUpdateConfirmDialog()"
-          [disabled]="formCheck.invalid" >
+          [disabled]="userForm.invalid" >
           <mat-icon>update</mat-icon>
           &nbsp;更新
         </button>
@@ -126,7 +126,7 @@
         <button class="navi-button" mat-raised-button color="primary"
           matTooltip="会社情報を追加します。" 
           (click)="openAppendConfirmDialog()"
-          [disabled]="formCheck.invalid" >
+          [disabled]="userForm.invalid" >
           <mat-icon>add</mat-icon>
           &nbsp;追加
         </button>
