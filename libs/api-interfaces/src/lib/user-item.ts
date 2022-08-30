@@ -20,7 +20,7 @@ export interface UserItem {
 */
 export interface GetUserItemArrayResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
-  errmsg?: string;        // エラーメッセージ(予定)
+  errmsg?: string;        // エラーメッセージ(省略可)
   item?: UserItem[];
 }
 /**
@@ -29,7 +29,7 @@ export interface GetUserItemArrayResponseBody {
 */
 export interface GetUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
-  errmsg?: string;        // エラーメッセージ(予定)
+  errmsg?: string;        // エラーメッセージ(省略可)
   item?: UserItem;
 }
 /**
@@ -38,7 +38,7 @@ export interface GetUserItemResponseBody {
 */
 export interface DeleteUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
-  errmsg?: string;        // エラーメッセージ(予定)
+  errmsg?: string;        // エラーメッセージ(省略可)
 }
 /**
  * @name AppendUserItemRequestBody
@@ -53,7 +53,7 @@ export interface AppendUserItemRequestBody {
 */
 export interface AppendUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
-  errmsg?: string;        // エラーメッセージ(予定)
+  errmsg?: string;        // エラーメッセージ(省略可)
 }
 /**
  * @name UpdateUserItemRequestBody
@@ -68,7 +68,7 @@ export interface UpdateUserItemRequestBody {
 */
 export interface UpdateUserItemResponseBody {
   status: number;         // 0:正常, 0以外はエラーコード(予定)
-  errmsg?: string;        // エラーメッセージ(予定)
+  errmsg?: string;        // エラーメッセージ(省略可)
 }
 
 

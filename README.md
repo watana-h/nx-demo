@@ -214,6 +214,7 @@ $ mkdir data
   - <a href="https://www.freakyjolly.com/angular-material-datatable-pagination-sorting-filter-and-fixed-columns-tutorial/">Angular Material 9|8 DataTable, Pagination, Sorting, Filter and Fixed Columns Tutorial</a>
   - <a href="https://www.mariokandut.com/how-to-translate-matpaginator-angular/">How to translate MatPaginator</a>
   - <a href="https://stackabuse.com/reading-and-writing-csv-files-in-nodejs-with-node-csv/">Reading and Writing CSV Files in Node.js with node-csv</a>
+  - <a href="https://zenn.dev/yutake27/articles/e4f959942c96d1">【Angular】変数に含まれる改行コードで改行する</a>
 
 - アイコン、favicon生成
   - <a href="https://www.iconfinder.com/iconsets/developerkit">Developer Kit icon pack</a>

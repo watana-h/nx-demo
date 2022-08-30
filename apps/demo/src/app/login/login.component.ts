@@ -26,17 +26,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   blnLoading = false;
   strLoadingMsg = "ログイン処理中です";
-  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";          // 半角英数字と一部記号(.@_-)
+  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";           // 正規表現: 半角英数字と一部記号(.@_-)
     
-  loginForm = this.fb.group({
+  loginForm = this.fb.group({               // FormGroup
     user:['',
-        [Validators.required,
-         Validators.pattern(this.ptnAnk)]],
+        [Validators.required,               // 必須項目
+         Validators.pattern(this.ptnAnk)]], // 利用可能文字を正規表現で指定
     password:['',
-        [Validators.required,
-         Validators.pattern(this.ptnAnk),
-         Validators.minLength(6),
-         Validators.maxLength(30)]],
+        [Validators.required,               // 必須項目
+         Validators.pattern(this.ptnAnk),   // 利用可能文字を正規表現で指定
+         Validators.minLength(6),           // 最小文字数
+         Validators.maxLength(30)]],        // 最大文字数
   });
 
   constructor(

@@ -13,13 +13,13 @@ const errNotFound: ErrorItem = {
 }
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'users/user-list', component: UserListComponent },
-  { path: 'users/user-edit', component: UserEditComponent },     // 追加
-  { path: 'users/user-edit/:id', component: UserEditComponent }, // 更新
-  { path: 'error', component: ErrorComponent },
-  { path: '**', component: ErrorComponent, data: errNotFound }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },          // ベースURLのみ → login にリダイレクト
+  { path: 'login', component: LoginComponent },                  // ログイン画面
+  { path: 'users/user-list', component: UserListComponent },     // 会社情報一覧画面
+  { path: 'users/user-edit', component: UserEditComponent },     // 会社情報追加画面
+  { path: 'users/user-edit/:id', component: UserEditComponent }, // 会社情報編集画面
+  { path: 'error', component: ErrorComponent },                  // エラー終了画面
+  { path: '**', component: ErrorComponent, data: errNotFound }   // その他 → エラー終了画面
 ];
 
 @NgModule({
