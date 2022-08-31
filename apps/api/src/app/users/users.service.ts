@@ -12,7 +12,7 @@ import { join } from 'path';
 import { resolve } from 'path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { parse } from 'csv-parse/sync'
-import { stringify } from 'csv-stringify';
+import { stringify } from 'csv-stringify/sync';
 
 
 @Injectable()
@@ -82,21 +82,17 @@ export class UsersService {
 //  console.log('saveUsers:file=', csvFile);
 
     if (this.users) {
-      stringify(this.users,
-        { header: true, quoted_string: true}, 
-        function(err, output) {
-          if (err) {
-            console.log(err);
-          } else {
-            try
-            {
-              writeFileSync(csvFile, output);
-              bSuccess = true;
-            } catch (e) {
-              console.log(e);
-            }
-          }
-        });
+      // 非同期コールバックでファイル出力とした場合のエラー処理実装について知識不足のため
+      // import { stringify } from 'csv-stringify/sync'
+      // と同期版を利用して try～catch でエラー処理を構築してみました
+      try
+      {
+        const sheet: string =  stringify(this.users, { header: true, quoted_string: true});
+        writeFileSync(csvFile, sheet);
+        bSuccess = true;
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       console.log('data is null');
     }
