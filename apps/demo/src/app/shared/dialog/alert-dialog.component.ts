@@ -11,9 +11,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./alert-dialog.component.css']
 })
 export class AlertDialogComponent {
-  title = "";
-  message = "";
-  cancelButtonText = "Cancel";
+  // メンバー変数 (const, let などの指定不可)
+  title: string = "";
+  message: string = "";
+  cancelButtonText: string = "Cancel";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: 

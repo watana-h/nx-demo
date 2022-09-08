@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class HeaderService {
+  // メンバー変数 (const, let などの指定不可)
   visible  = new BehaviorSubject(false);
   isLogout  = new BehaviorSubject(true);
   title  = new BehaviorSubject("受発注管理");

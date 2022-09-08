@@ -10,10 +10,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent {
-  title = "";
-  message = "";
-  okButtonText = "Ok";
-  cancelButtonText = "Cancel";
+  // メンバー変数 (const, let などの指定不可)
+  title: string = "";
+  message: string = "";
+  okButtonText: string = "Ok";
+  cancelButtonText: string = "Cancel";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:

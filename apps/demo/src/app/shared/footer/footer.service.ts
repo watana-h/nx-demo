@@ -9,7 +9,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class FooterService {
-  visible  = new BehaviorSubject(false);
+  // メンバー変数 (const, let などの指定不可)
+  visible = new BehaviorSubject(false);
 
   constructor() { }
 

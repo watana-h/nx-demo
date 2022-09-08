@@ -22,6 +22,7 @@ import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit, OnDestroy {
+  // メンバー変数 (const, let などの指定不可)
   displayedColumns: string[] = ["id", "company", "email", "telephone", "address"];
   dataSource = new MatTableDataSource<UserItem>([]);
 
@@ -33,7 +34,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     private service: UsersService,
     private dialog: MatDialog){}
 
-    @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+    @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
     @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
   ngOnInit(): void {

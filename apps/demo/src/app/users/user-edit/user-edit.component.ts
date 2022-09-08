@@ -28,37 +28,13 @@ import { ConfirmDialogComponent } from '../../shared/dialog/confirm-dialog.compo
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit, OnDestroy {
-  blnPassVisible = true;
-  isUpdate = true;
+  // メンバー変数 (const, let などの指定不可)
+  blnPassVisible: boolean = true;
+  isUpdate: boolean = true;
   public user: UserItem = { id: "", company: "", email: "", telephone: "", address: "",
                             account: "", password: "", deleted: "" };
   id: string = '';
-
-  // 正規表現
-  ptnTelephone = "^[0-9-]+$";
-  ptnEmail = "^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$";
-  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";
-
-  userForm = this.fb.group({                     // FormGroup
-    id:[{value: '', disabled: true}],            // 編集不可(disabled)
-    company:['', Validators.required],           // 必須項目
-    telephone:['',
-      [Validators.required,                      // 必須項目
-       Validators.pattern(this.ptnTelephone)]],  // 利用可能文字を正規表現で指定
-    email:['',
-      [Validators.required,                      // 必須項目
-       Validators.pattern(this.ptnEmail)]],      // 利用可能文字を正規表現で指定
-    address:[''],
-    account:['',
-      [Validators.required,                      // 必須項目
-       Validators.pattern(this.ptnAnk)]],        // 利用可能文字を正規表現で指定
-    password:['',
-      [Validators.required,                      // 必須項目
-       Validators.pattern(this.ptnAnk),          // 利用可能文字を正規表現で指定
-       Validators.minLength(6),                  // 最小文字数
-       Validators.maxLength(30)]],               // 最大文字数
-  });
-
+  userForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,7 +43,35 @@ export class UserEditComponent implements OnInit, OnDestroy {
     private footer: FooterService,
     private service: UsersService,
     private fb: FormBuilder,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog) {
+      // 正規表現:「半角英数字と一部記号(.@_-)」など
+      const ptnAnk: string = "^[a-zA-Z0-9\.@_-]+$";
+      const ptnTelephone: string = "^[0-9-]+$";
+      const ptnEmail: string = "^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$";
+
+      // FormGroup
+      this.userForm = this.fb.group({
+        id:[{value: '', disabled: true}],       // 編集不可(disabled:true)
+        company:['', Validators.required],      // バリデーター: 必須項目
+        telephone:['',                          // 初期値
+          [Validators.required,                 // バリデーター: 必須項目
+           Validators.pattern(ptnTelephone)]],  // バリデーター: 利用可能文字パターン
+        email:['',                              // 初期値
+          [Validators.required,                 // バリデーター: 必須項目
+           Validators.pattern(ptnEmail)]],      // バリデーター: 利用可能文字パターン
+        address:[''],                           // 初期値
+        account:['',                            // 初期値
+          [Validators.required,                 // バリデーター: 必須項目
+           Validators.pattern(ptnAnk)]],        // バリデーター: 利用可能文字パターン
+        password:['',                           // 初期値
+          [Validators.required,                 // バリデーター: 必須項目
+           Validators.pattern(ptnAnk),          // バリデーター: 利用可能文字パターン
+           Validators.minLength(6),             // バリデーター: 最小文字数
+           Validators.maxLength(30)]],          // バリデーター: 最大文字数
+      });
+
+
+    }
 
   ngOnInit(): void {
     const paramId = this.route.snapshot.paramMap.get('id');

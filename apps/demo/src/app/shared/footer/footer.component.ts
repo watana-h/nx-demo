@@ -12,6 +12,7 @@ import { FooterService } from './footer.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  // メンバー変数 (const, let などの指定不可)
   footerVisible: boolean = false; 
 
   constructor(

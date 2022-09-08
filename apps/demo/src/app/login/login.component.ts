@@ -19,32 +19,36 @@ import { FooterService } from '../shared/footer/footer.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  title="ログインページ";
-  errors: string[]=[];
-  blnPassVisible = true;
+  // メンバー変数 (const, let などの指定不可)
+  title: string = "ログインページ";
+  errors: string[] = [];
+  blnPassVisible: boolean = true;
+  blnLoading: boolean = false;
+  strLoadingMsg: string = "ログイン処理中です";
+  loginForm: FormGroup;
   auth: AuthParam = {user: "", password: ""};
-
-  blnLoading = false;
-  strLoadingMsg = "ログイン処理中です";
-  ptnAnk = "^[a-zA-Z0-9\.@_-]+$";           // 正規表現: 半角英数字と一部記号(.@_-)
     
-  loginForm = this.fb.group({               // FormGroup
-    user:['',
-        [Validators.required,               // 必須項目
-         Validators.pattern(this.ptnAnk)]], // 利用可能文字を正規表現で指定
-    password:['',
-        [Validators.required,               // 必須項目
-         Validators.pattern(this.ptnAnk),   // 利用可能文字を正規表現で指定
-         Validators.minLength(6),           // 最小文字数
-         Validators.maxLength(30)]],        // 最大文字数
-  });
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private header: HeaderService,
     private footer: FooterService,
-    private fb: FormBuilder ) { }
+    private fb: FormBuilder ) {
+      // 正規表現:「半角英数字と一部記号(.@_-)」
+      const ptnAnk: string  = "^[a-zA-Z0-9\.@_-]+$";
+
+      // FormGroup
+      this.loginForm = fb.group({
+        user:['',                        // 初期値
+          [Validators.required,          // バリデーター: 必須項目
+           Validators.pattern(ptnAnk)]], // バリデーター: 利用可能文字パターン
+        password:['',                    // 初期値
+          [Validators.required,          // バリデーター: 必須項目
+           Validators.pattern(ptnAnk),   // バリデーター: 利用可能文字パターン
+           Validators.minLength(6),      // バリデーター: 最小文字数
+           Validators.maxLength(30)]],   // バリデーター: 最大文字数
+      });
+    }
 
     login(): void {
       //エラー配列クリア

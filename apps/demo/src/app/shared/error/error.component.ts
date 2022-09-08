@@ -8,20 +8,17 @@ import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
 import { ErrorTarget, errorTargetTbls, errorResponseTbls, ErrorItem } from '@nx-demo/api-interfaces';
 
-const baseMessage = '原因不明の障害です。サポートセンターにご連絡ください。';
-const baseTarget = ErrorTarget.other;
-
 @Component({
   selector: 'nx-demo-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-
+  // メンバー変数 (const, let などの指定不可)
   eno?: number;
-  message = baseMessage;
-  target = baseTarget;
-  headerTitle = "契約会社管理";
+  message: string = '原因不明の障害です。サポートセンターにご連絡ください。';
+  target: string = ErrorTarget.other
+  headerTitle: string = "契約会社管理";
 
   constructor(
     private header: HeaderService,
@@ -56,25 +53,18 @@ export class ErrorComponent implements OnInit, OnDestroy {
   
         this.eno = data['errorCode']; 
         this.message = data['errorMessage'];
-        this.target = data['errorTarget'] ? data['errorTarget'] : baseTarget;
+        this.target = data['errorTarget'] || this.target;
       })
     }
   }
 
   ngOnInit(): void {
-    const targetTitle = errorTargetTbls.find(item => item.id == this.target)?.title;
-    if (targetTitle) {
-      this.headerTitle = targetTitle;
-    }
+    const targetTitle: string|undefined = errorTargetTbls.find(item => item.id == this.target)?.title;
+    this.headerTitle = targetTitle || this.headerTitle;
+
     if (this.eno) {
-      const enoMessage = errorResponseTbls.find(item => item.code == this.eno)?.title;
-      if (enoMessage) {
-        this.message = enoMessage;
-      }
-    }
-    if (!this.message) {
-      console.log('massage default');
-      this.message = baseMessage;
+      const enoMessage: string|undefined = errorResponseTbls.find(item => item.code == this.eno)?.title;
+      this.message = enoMessage || this.message;
     }
 
     // header,footer表示
