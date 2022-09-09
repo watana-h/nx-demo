@@ -1,4 +1,4 @@
-import { Controller, Get, Delete, Post, Body, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Get, Delete, Put, Post, Body, HttpCode, HttpStatus, Param } from '@nestjs/common';
 
 import { UserItem, 
          GetUserItemArrayResponseBody, 
@@ -47,7 +47,7 @@ export class UsersController {
    * @description 対象idの情報更新
    * @params UpdateUserItemRequestBody
    */
-  @Post('update')
+  @Put('update')
   @HttpCode(HttpStatus.OK) 
   updateUser(@Body() body: UpdateUserItemRequestBody): UpdateUserItemResponseBody {
     return this.usersService.updateUser(body)

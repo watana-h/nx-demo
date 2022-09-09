@@ -59,7 +59,7 @@ export class UsersService {
    * @returns UpdateUserItemResponseBody
    */
   updateUser(body: UpdateUserItemRequestBody): Observable<UpdateUserItemResponseBody> {
-    return this.http.post<UpdateUserItemResponseBody>('/api/users/update', body);
+    return this.http.put<UpdateUserItemResponseBody>('/api/users/update', body);
   }
 
   /**
