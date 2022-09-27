@@ -9,9 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { AuthParam } from '@nx-demo/api-interfaces';
+
 import { HeaderService } from '../shared/header/header.service';
 import { FooterService } from '../shared/footer/footer.service';
+import { LoginService } from './login.service';
+import { LoginParam, AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interfaces';
 
 @Component({
   selector: 'nx-demo-login',
@@ -26,16 +28,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   blnLoading: boolean = false;
   strLoadingMsg: string = "ログイン処理中です";
   loginForm: FormGroup;
-  auth: AuthParam = {user: "", password: ""};
+
+  loginParam: LoginParam = {user: "", password: ""};
     
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private header: HeaderService,
     private footer: FooterService,
+    private service: LoginService,
     private fb: FormBuilder ) {
       // 正規表現:「半角英数字と一部記号(.@_-)」
-      const ptnAnk: string  = "^[a-zA-Z0-9\.@_-]+$";
+      const ptnAnk  = "^[a-zA-Z0-9\.@_-]+$";
 
       // FormGroup
       this.loginForm = fb.group({
@@ -51,11 +55,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     login(): void {
+      const loginParam: LoginParam = { user: this.loginForm.value.user, 
+                                       password: this.loginForm.value.password };
       //エラー配列クリア
       this.errors = [];
 
-      if (this.loginForm.value.user==='') this.errors.push("ユーザー名を空白にはできません");
-      if (this.loginForm.value.password==='') this.errors.push("パスワードを空白にはできません");
+      if (loginParam.user === '') this.errors.push("ユーザー名を空白にはできません");
+      if (loginParam.password === '') this.errors.push("パスワードを空白にはできません");
           
       //この段階でエラーなら戻る
       if (0 < this.errors.length) {
@@ -65,11 +71,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       // ウェイト画面
       this.blnLoading = true;
 
-      // スリープ(800ms)後に処理実施
-      const delay_observable = of('').pipe(delay(800));
-      delay_observable.subscribe(s => {
-        // ユーザ一覧ページに遷移
-        this.router.navigateByUrl('/users/user-list');
+      const body: AuthLoginRequestBody = { param: loginParam };
+      this.service.authLogin(body).subscribe(response => {
+        if (response.result) {
+          // スリープ(800ms)後に処理実施
+          const delay_observable = of('').pipe(delay(800));
+          delay_observable.subscribe(s => {
+            // ユーザ一覧ページに遷移
+            this.router.navigateByUrl('/users/user-list');
+          });
+        } else {
+          this.errors.push("ユーザー名とパスワードが同一文字列のため認証エラー");
+          this.blnLoading = false;
+        }
       });
    }
 

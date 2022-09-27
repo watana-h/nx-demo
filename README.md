@@ -88,6 +88,7 @@ nx-demo
  │  ├ api            ［ バックエンド：NestJS ］
  │  │  └ src 
  │  │     ├ app  
+ │  │     │  ├ login
  │  │     │  └ users
  │  │     ├ assets  
  │  │     └ environments 
@@ -159,6 +160,7 @@ $ npx nx generate component   shared/dialog/confirm-dialog --flat --project=demo
 $ npx nx generate component   shared/error                 --project=demo --module=app
 $ npx nx generate interceptor shared/interceptors/http-error --flat --project=demo
 $ npx nx generate component   login           --project=demo --module=app
+$ npx nx generate service     login/login     --project=demo
 $ npx nx generate component   users/user-edit --project=demo --module=app
 $ npx nx generate component   users/user-list --project=demo --module=app
 $ npx nx generate service     users/users     --project=demo
@@ -178,6 +180,9 @@ $ npm install csv-parse
 $ npm install csv-stringify
 
 # (4)-3. バックエンドアプリ構築
+$ npx nx generate @nrwl/nest:module     app/login --project=api
+$ npx nx generate @nrwl/nest:controller app/login --project=api
+$ npx nx generate @nrwl/nest:service    app/login --project=api
 $ npx nx generate @nrwl/nest:module     app/users --project=api
 $ npx nx generate @nrwl/nest:controller app/users --project=api
 $ npx nx generate @nrwl/nest:service    app/users --project=api
