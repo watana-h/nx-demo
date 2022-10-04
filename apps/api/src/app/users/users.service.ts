@@ -8,96 +8,15 @@ import { UserItem,
          UpdateUserItemRequestBody,
          UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
 
-import { join } from 'path';
-import { resolve } from 'path';
-import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { parse } from 'csv-parse/sync'
-import { stringify } from 'csv-stringify/sync';
-
+import { MastorRepository } from '../repositories/master-repository';
 
 @Injectable()
 export class UsersService {
-  private emsgFileLoad: string = 'NestJS:対象ファイルのロードでエラーが発生しました。';
-  private emsgFileSave: string = 'NestJS:対象ファイルのセーブでエラーが発生しました。';
-  private emsgNotFound: string = 'NestJS:対象とする情報が存在しません。';
-  private users: UserItem[] = [];
+  private emsgFileLoad = 'NestJS:対象ファイルの取得でエラーが発生しました。';
+  private emsgFileSave = 'NestJS:対象ファイルの更新でエラーが発生しました。';
+  private emsgNotFound = 'NestJS:対象とする情報が存在しません。';
 
-  constructor() { }
-
-  /**
-   * @name loadUsers
-   * @description CSVファイルを users に読み込む
-   */
-  loadUsers(): boolean {
-    let bSuccess: boolean = false;
-
-    // 配列(users)を全クリア
-    this.users.length = 0;
-
-    // 対象ファイル
-    const csvFile: string = join(resolve(), 'data/UserItemList.csv');
-//  console.log('loadUsers:file=', csvFile);
-
-    if (!existsSync(csvFile)) {
-      console.log('loadUsers:file not found [' + csvFile + ']');
-    } else {
-      try
-      {
-        // CSVロード&解析
-        const data = readFileSync(csvFile);
-        const records = parse(data, {columns: true, trim: true});
-
-        // データ確認して配列(users)に追加
-        for (const record of records) {
-          // console.log(record);
-
-          if( typeof record['id'] !== "undefined"
-           && typeof record['company'] !== "undefined"
-           && typeof record['email'] !== "undefined"
-           && typeof record['telephone'] !== "undefined"
-           && typeof record['address'] !== "undefined"
-           && typeof record['account'] !== "undefined"
-           && typeof record['password'] !== "undefined"
-           && typeof record['deleted'] !== "undefined") {
-              // console.log('record match');
-              this.users.push(record);
-          }
-        }
-        bSuccess = true;
-      } catch (e) {
-        console.log(e);
-        this.users.length = 0;
-      }
-    }
-    return bSuccess;
-  }
-
-  /**
-   * @name saveUsers
-   * @description users を CSV に書き出す
-   */
-  saveUsers() : boolean {
-    let   bSuccess: boolean = false;
-    const csvFile: string = join(resolve(), 'data/UserItemList.csv');
-//  console.log('saveUsers:file=', csvFile);
-
-    if (this.users) {
-      // 非同期コールバックでファイル出力とした場合のエラー処理実装について知識不足のため
-      // import { stringify } from 'csv-stringify/sync'
-      // と同期版を利用して try～catch でエラー処理を構築してみました
-      try
-      {
-        const sheet: string =  stringify(this.users, { header: true, quoted_string: true});
-        writeFileSync(csvFile, sheet);
-        bSuccess = true;
-      } catch (e) {
-        console.log(e);
-      }
-    } else {
-      console.log('data is null');
-    }
-    return bSuccess;
-  }
+  constructor(private masterRepo: MastorRepository) { }
 
   /**
    * @name getUsers
@@ -105,19 +24,12 @@ export class UsersService {
    * @returns GetUserItemArrayResponseBody
    */
   getUsers(): GetUserItemArrayResponseBody {
+    console.log('getUsers()');
     let   res: GetUserItemArrayResponseBody;
-    const sts: boolean = this.loadUsers();
-    if (sts) {
-      const allcount: number = (this.users) ? this.users.length : 0;
-      console.log('getUsers:件数=', allcount);
+    const users: UserItem[] | null = this.masterRepo.FindAll();
 
-      if (allcount > 0) {
-        const deleted = this.users.filter(function(item) {
-          return item.deleted == "1";
-        });
-        console.log('削除件数=', (deleted) ? deleted.length : 0);
-      }
-      res = {status: 0, item: this.users};
+    if(users) {
+      res = {status: 0, item: users};
     } else {
       res = {status: 1, errmsg: this.emsgFileLoad};
     }
@@ -131,19 +43,16 @@ export class UsersService {
    * @returns GetUserItemResponseBody
    */
   getUser(id: string): GetUserItemResponseBody {
-    console.log('getUser:id=', id);
-
+    console.log('getUser(): id=', id);
     let   res: GetUserItemResponseBody;
-    const sts: boolean = this.loadUsers();
-    if (sts) {
-      const target: UserItem = this.users.find(value => value.id == id );
-      if (target) {
-        res = {status: 0, item: target};
-      } else {
-        res = {status: 1, errmsg: this.emsgNotFound};
-      }
-    } else {
+    const user: UserItem | undefined | null = this.masterRepo.FindOne(id);
+
+    if(user == null) {
       res = {status: 1, errmsg: this.emsgFileLoad};
+    } else if(user == undefined) {
+      res = {status: 1, errmsg: this.emsgNotFound};
+    } else {
+      res = {status: 0, item: user};
     }
     return res;
   }
@@ -155,25 +64,14 @@ export class UsersService {
    * @returns DeleteUserItemResponseBody
    */
   deleteUser(id: string): DeleteUserItemResponseBody {
-    console.log('deleteUser:id=', id);
-
+    console.log('deleteUser(): id=', id);
     let res: DeleteUserItemResponseBody;
-    let sts: boolean = this.loadUsers();
-    if (sts) {
-      const index: number = this.users.findIndex(item => item.id == id);
-      if (index >= 0) {
-        this.users[index].deleted = "1";
-        sts = this.saveUsers();
-        if (sts) {
-          res = {status: 0};
-        } else {
-          res = {status: 1, errmsg: this.emsgFileSave};
-        }
-      } else {
-        res = {status: 1, errmsg: this.emsgNotFound};
-      }
+    const bResult: boolean = this.masterRepo.DeleteOen(id);
+
+    if (bResult) {
+      res = {status: 0};
     } else {
-      res = {status: 1, errmsg: this.emsgFileLoad};
+      res = {status: 1, errmsg: this.emsgFileSave};
     }
     return res;
   }
@@ -185,30 +83,14 @@ export class UsersService {
    * @returns UpdateUserItemResponseBody
    */
   updateUser(body: UpdateUserItemRequestBody): UpdateUserItemResponseBody {
-    console.log('updateUser:id=', body.item.id);
-
+    console.log('updateUser(): id=', body.item.id);
     let res: UpdateUserItemResponseBody;
-    let sts: boolean = this.loadUsers();
-    if (sts) {
-      const index: number = this.users.findIndex(item => item.id == body.item.id);
-      if (index >= 0) {
-        this.users[index].company   = body.item.company;
-        this.users[index].email     = body.item.email;
-        this.users[index].telephone = body.item.telephone;
-        this.users[index].address   = body.item.address;
-        this.users[index].account   = body.item.account;
-        this.users[index].password  = body.item.password;
-        sts = this.saveUsers();
-        if (sts) {
-          res = {status: 0};
-        } else {
-          res = {status: 1, errmsg: this.emsgFileSave};
-        }
-      } else {
-        res = {status: 1, errmsg: this.emsgNotFound};
-      }
+    const bResult: boolean = this.masterRepo.UpdateOne(body.item);
+
+    if (bResult) {
+      res = {status: 0};
     } else {
-      res = {status: 1, errmsg: this.emsgFileLoad};
+      res = {status: 1, errmsg: this.emsgFileSave};
     }
     return res;
   }
@@ -220,39 +102,16 @@ export class UsersService {
    * @returns AppendUserItemResponseBody
    */
   appendUser(body: AppendUserItemRequestBody): AppendUserItemResponseBody {
+    console.log('appendUser()');
     let res: AppendUserItemResponseBody;
-    let sts: boolean = this.loadUsers();
-    if (sts) {
-      // 現時点 id の最大値
-      const initialVals: number = 0;
-      const maxVals: number = this.users.reduce(
-        (previousValue, currentItem) => Math.max(previousValue, Number(currentItem.id)), initialVals
-      )
+    const bResult: boolean = this.masterRepo.AppendOne(body.item);
 
-      // ゼロパディング文字列
-      const newId: string = ('0000' + (maxVals + 1)).slice(-4);
-      console.log('appendUser:id=', newId);
-
-      // 追加
-      const newItem : UserItem =
-	{id: newId, 
-         company: body.item.company,
-         email: body.item.email, 
-         telephone: body.item.telephone,
-         address: body.item.address, 
-         account: body.item.account,
-         password: body.item.password, 
-         deleted: "0" };
-      this.users.push(newItem);
-      sts = this.saveUsers();
-      if (sts) {
-        res = {status: 0};
-      } else {
-        res = {status: 1, errmsg: this.emsgFileSave};
-      }
+    if (bResult) {
+      res = {status: 0};
     } else {
-      res = {status: 1, errmsg: this.emsgFileLoad};
+      res = {status: 1, errmsg: this.emsgFileSave};
     }
     return res;
   }
+
 }

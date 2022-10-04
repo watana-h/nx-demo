@@ -88,8 +88,9 @@ nx-demo
  │  ├ api            ［ バックエンド：NestJS ］
  │  │  └ src 
  │  │     ├ app  
- │  │     │  ├ login
- │  │     │  └ users
+ │  │     │  ├ login           [ ログイン機能 ]
+ │  │     │  └ users           [ ユーザー編集/一覧機能 ]
+ │  │     │  └ repositories    [ データソース ]
  │  │     ├ assets  
  │  │     └ environments 
  │  ├ demo           ［ フロントエンド：Angular ］
@@ -103,8 +104,8 @@ nx-demo
  │  │     │  │  └ interceptors
  │  │     │  ├ login           ［ ログイン画面 ］
  │  │     │  └ users
- │  │     │      ├ user-edit   ［ 編集画面 ］
- │  │     │      └ user-list   ［ 一覧画面 ］
+ │  │     │      ├ user-edit   ［ ユーザー編集画面 ］
+ │  │     │      └ user-list   ［ ユーザー一覧画面 ］
  │  │     ├ assets  
  │  │     └ environments 
  │  └ demo-e2e
@@ -186,6 +187,9 @@ $ npx nx generate @nrwl/nest:service    app/login --project=api
 $ npx nx generate @nrwl/nest:module     app/users --project=api
 $ npx nx generate @nrwl/nest:controller app/users --project=api
 $ npx nx generate @nrwl/nest:service    app/users --project=api
+
+$ mkdir apps/api/src/app/repositories
+$ touch apps/api/src/app/repositories/master-repository.ts
 // [TODO] 生成された各種ファイルを編集
 
 # ---------------------------------------------------------

@@ -4,11 +4,11 @@ import { AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interf
 
 @Controller('login')
 export class LoginController {
-    constructor(private readonly loginService: LoginService) {}
+  constructor(private readonly loginService: LoginService) {}
 
-    @Post('/auth')
-    @HttpCode(HttpStatus.OK)
-    authLogin(@Body() body: AuthLoginRequestBody): AuthLoginResponseBody {
-        return this.loginService.authLogin(body);
-    }
+  @Post('/auth')
+  @HttpCode(HttpStatus.OK)
+  authLogin(@Body() body: AuthLoginRequestBody): AuthLoginResponseBody {
+    return this.loginService.authLogin(body);
+  }
 }

@@ -11,7 +11,7 @@ export class LoginService {
    * @description 認証処理
    */
   authLogin(body: AuthLoginRequestBody) : AuthLoginResponseBody {
-    console.log('authLogin:user=', body.param.user);
+    console.log('authLogin(): user=', body.param.user);
     let res: AuthLoginResponseBody;
 
     if (body.param.user === body.param.password) {
