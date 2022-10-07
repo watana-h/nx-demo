@@ -5,6 +5,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interfaces';
 
 @Injectable({
@@ -12,7 +13,9 @@ import { AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interf
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // 何もしない
+  }
 
   /**
    * @name authLogin
@@ -21,4 +24,5 @@ export class LoginService {
   authLogin(body: AuthLoginRequestBody): Observable<AuthLoginResponseBody> {
     return this.http.post<AuthLoginResponseBody>('/api/login/auth', body);
   }
+
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { UserItem, 
          GetUserItemArrayResponseBody,
          GetUserItemResponseBody,
@@ -7,7 +8,6 @@ import { UserItem,
          AppendUserItemResponseBody,
          UpdateUserItemRequestBody,
          UpdateUserItemResponseBody } from '@nx-demo/api-interfaces';
-
 import { MastorRepository } from '../repositories/master-repository';
 
 @Injectable()
@@ -16,7 +16,9 @@ export class UsersService {
   private emsgFileSave = 'NestJS:対象ファイルの更新でエラーが発生しました。';
   private emsgNotFound = 'NestJS:対象とする情報が存在しません。';
 
-  constructor(private masterRepo: MastorRepository) { }
+  constructor(private masterRepo: MastorRepository) {
+    // 何もしない
+  }
 
   /**
    * @name getUsers

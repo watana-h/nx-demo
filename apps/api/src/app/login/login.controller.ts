@@ -1,6 +1,7 @@
 import { Controller, Post, HttpCode, HttpStatus, Body } from '@nestjs/common';
-import { LoginService } from './login.service';
+
 import { AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interfaces';
+import { LoginService } from './login.service';
 
 @Controller('login')
 export class LoginController {

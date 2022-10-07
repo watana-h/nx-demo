@@ -14,7 +14,9 @@ export class HeaderService {
   isLogout  = new BehaviorSubject(true);
   title  = new BehaviorSubject("受発注管理");
 
-  constructor() { }
+  constructor() {
+    // 何もしない
+  }
 
   // タイトル文字列設定
   setTitle(title: string) {

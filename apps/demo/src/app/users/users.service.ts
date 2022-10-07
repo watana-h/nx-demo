@@ -3,11 +3,10 @@
  * @description ユーザ情報をバックエンドから取得
 */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, retry, throwError, catchError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-import { UserItem,
-         GetUserItemArrayResponseBody,
+import { GetUserItemArrayResponseBody,
          GetUserItemResponseBody,
          DeleteUserItemResponseBody,
          AppendUserItemRequestBody,
@@ -19,9 +18,10 @@ import { UserItem,
   providedIn: 'root'
 })
 export class UsersService {
-  // users: UserItem[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // 何もしない
+  }
 
   /**
    * @name getUsers

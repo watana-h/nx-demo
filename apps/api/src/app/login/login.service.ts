@@ -4,7 +4,9 @@ import { AuthLoginRequestBody, AuthLoginResponseBody } from '@nx-demo/api-interf
 @Injectable()
 export class LoginService {
 
-  constructor() { }
+  constructor() {
+    // 何もしない
+  }
 
   /**
    * @name authLogin

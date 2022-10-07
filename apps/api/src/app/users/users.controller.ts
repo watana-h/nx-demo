@@ -1,7 +1,6 @@
 import { Controller, Get, Delete, Put, Post, Body, HttpCode, HttpStatus, Param } from '@nestjs/common';
 
-import { UserItem, 
-         GetUserItemArrayResponseBody, 
+import { GetUserItemArrayResponseBody,
          GetUserItemResponseBody,
          DeleteUserItemResponseBody,
          AppendUserItemRequestBody,
@@ -12,7 +11,10 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+
+  constructor(private readonly usersService: UsersService) {
+    // 何もしない
+  }
 
   /**
    * @description 一覧取得

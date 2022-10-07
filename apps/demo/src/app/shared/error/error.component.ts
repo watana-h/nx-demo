@@ -4,9 +4,10 @@
 */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Data } from '@angular/router';
+
+import { ErrorTarget, errorTargetTbls, errorResponseTbls } from '@nx-demo/api-interfaces';
 import { HeaderService } from '../header/header.service';
 import { FooterService } from '../footer/footer.service';
-import { ErrorTarget, errorTargetTbls, errorResponseTbls, ErrorItem } from '@nx-demo/api-interfaces';
 
 @Component({
   selector: 'nx-demo-error',
@@ -16,9 +17,9 @@ import { ErrorTarget, errorTargetTbls, errorResponseTbls, ErrorItem } from '@nx-
 export class ErrorComponent implements OnInit, OnDestroy {
   // メンバー変数 (const, let などの指定不可)
   eno?: number;
-  message: string = '原因不明の障害です。サポートセンターにご連絡ください。';
+  message = '原因不明の障害です。サポートセンターにご連絡ください。';
   target: string = ErrorTarget.other
-  headerTitle: string = "契約会社管理";
+  headerTitle = "契約会社管理";
 
   constructor(
     private header: HeaderService,
@@ -54,7 +55,7 @@ export class ErrorComponent implements OnInit, OnDestroy {
         this.eno = data['errorCode']; 
         this.message = data['errorMessage'];
         this.target = data['errorTarget'] || this.target;
-      })
+      });
     }
   }
 

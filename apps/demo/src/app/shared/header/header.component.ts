@@ -14,14 +14,17 @@ import { HeaderService } from './header.service';
 })
 export class HeaderComponent implements OnInit {
   // メンバー変数 (const, let などの指定不可)
-  headerTitle: string = "契約会社管理";
-  headerVisible: boolean = false; 
-  logoutVisible: boolean = true;
+  headerTitle = "契約会社管理";
+  headerVisible = false;
+  logoutVisible = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private header: HeaderService) { }
+    private header: HeaderService
+  ) {
+    // 何もしない
+  }
 
   ngOnInit(): void {
     this.header.title.subscribe(updatedValue => this.headerTitle = updatedValue);

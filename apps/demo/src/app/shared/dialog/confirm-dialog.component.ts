@@ -4,6 +4,7 @@
 */
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 @Component({
   selector: 'nx-demo-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
@@ -11,22 +12,23 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ConfirmDialogComponent {
   // メンバー変数 (const, let などの指定不可)
-  title: string = "";
-  message: string = "";
-  okButtonText: string = "Ok";
-  cancelButtonText: string = "Cancel";
+  title = "";
+  message = "";
+  okButtonText = "Ok";
+  cancelButtonText = "Cancel";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data:
       { title: string,
         message: string,
         buttonText: {ok: string, cancel: string} },
-    private dialogRef: MatDialogRef<ConfirmDialogComponent>) {
+    private dialogRef: MatDialogRef<ConfirmDialogComponent>
+  ) {
     if (data) {
-      // 条件分岐省略
-      // if (hoge) { bar = hoge; } else { bar = 'empty'; }
-      // ↓
-      // bar = hoge || 'empty';
+    // 条件分岐省略
+    // if (hoge) { bar = hoge; } else { bar = 'empty'; }
+    // ↓
+    // bar = hoge || 'empty';
 
       this.title = data.title || this.title;
       this.message = data.message || this.message;

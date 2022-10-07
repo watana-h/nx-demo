@@ -12,25 +12,26 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError, catchError } from 'rxjs';
 import { Router } from '@angular/router';
-import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
-import { state } from '@angular/animations';
+
+import { ErrorTarget } from '@nx-demo/api-interfaces';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    // 何もしない
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          let errorMsg = '';
-          if (error.error instanceof ErrorEvent) {
-            console.log('This is client side error');
-            errorMsg = `Error: ${error.error.message}`;
-          } else {
-            console.log('This is server side error');
-            errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMsg = '';
+        if (error.error instanceof ErrorEvent) {
+          console.log('This is client side error');
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          console.log('This is server side error');
+          errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
 
          // この形式だとうまくいかないみたい
          // const errItem : ErrorItem = {
@@ -40,16 +41,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
          // }
          // this.router.navigate(['error'], {state: errItem});
 
-            this.router.navigate(['error'], 
-                                 {state: 
-                                   {errorCode: error.status,
-                                    errorMessage: error.message, 
-                                    errorTarget: ErrorTarget.backend}});
-          }
-          console.log(errorMsg);
-          return throwError(errorMsg);
+          this.router.navigate(['error'],
+                               {state:
+                                 {errorCode: error.status,
+                                  errorMessage: error.message,
+                                  errorTarget: ErrorTarget.backend}});
+        }
+        console.log(errorMsg);
+        return throwError(errorMsg);
       })
-  )
-
+    );
   }
+
 }

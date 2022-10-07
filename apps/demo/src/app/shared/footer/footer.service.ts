@@ -12,7 +12,9 @@ export class FooterService {
   // メンバー変数 (const, let などの指定不可)
   visible = new BehaviorSubject(false);
 
-  constructor() { }
+  constructor() {
+    // 何もしない
+  }
 
   // フッタ表示/非表示
   setVisible(isVisible: boolean) {

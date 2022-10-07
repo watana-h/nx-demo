@@ -13,10 +13,11 @@ import { FooterService } from './footer.service';
 })
 export class FooterComponent implements OnInit {
   // メンバー変数 (const, let などの指定不可)
-  footerVisible: boolean = false; 
+  footerVisible = false;
 
-  constructor(
-    private footer: FooterService) { }
+  constructor(private footer: FooterService) {
+    // 何もしない
+  }
 
   ngOnInit(): void {
     this.footer.visible.subscribe(updatedValue => this.footerVisible = updatedValue);

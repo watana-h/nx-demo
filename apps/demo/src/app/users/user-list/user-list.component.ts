@@ -7,14 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
+import { UserItem, ErrorTarget } from '@nx-demo/api-interfaces';
 import { HeaderService } from '../../shared/header/header.service';
 import { FooterService } from "../../shared/footer/footer.service";
 import { UsersService } from "../users.service";
-import { UserItem, GetUserItemArrayResponseBody } from '@nx-demo/api-interfaces';
-import { ErrorItem, ErrorTarget } from '@nx-demo/api-interfaces';
-import { AlertDialogComponent } from "../../shared/dialog/alert-dialog.component";
 
 @Component({
   selector: 'nx-demo-user-list',
@@ -32,10 +30,13 @@ export class UserListComponent implements OnInit, OnDestroy {
     private header: HeaderService,
     private footer: FooterService,
     private service: UsersService,
-    private dialog: MatDialog){}
+    private dialog: MatDialog
+  ) {
+    // 何もしない
+  }
 
-    @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
-    @ViewChild(MatSort, {static: true}) sort!: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort!: MatSort;
 
   ngOnInit(): void {
     // header,footer表示

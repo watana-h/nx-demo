@@ -12,21 +12,22 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AlertDialogComponent {
   // メンバー変数 (const, let などの指定不可)
-  title: string = "";
-  message: string = "";
-  cancelButtonText: string = "Cancel";
+  title = "";
+  message = "";
+  cancelButtonText = "Cancel";
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: 
       { title: string,
         message: string, 
         buttonText: {cancel: string} },
-    private dialogRef: MatDialogRef<AlertDialogComponent>) {
+    private dialogRef: MatDialogRef<AlertDialogComponent>
+  ) {
     if (data) {
-      // 条件分岐省略
-      // if (hoge) { bar = hoge; } else { bar = 'empty'; }
-      // ↓
-      // bar = hoge || 'empty';
+    // 条件分岐省略
+    // if (hoge) { bar = hoge; } else { bar = 'empty'; }
+    // ↓
+    // bar = hoge || 'empty';
 
       this.title = data.title || this.title;
       this.message = data.message || this.message;
